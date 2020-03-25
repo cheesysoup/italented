@@ -2,6 +2,9 @@
     const quizContainer = document.getElementById('quiz');
     const resultsContainer = document.getElementById('results');
     const submitButton = document.getElementById('submit');
+    const correctPoints = 6;
+    const blankPoints = 1.5;
+    const wrongPoints = 0;
 
     const myQuestions = [
         {
@@ -76,14 +79,15 @@
 
         // keep track of user's answers
         let numCorrect = 0;
-    
+        let numBlank = 0;
+        
+
         // for each question...
         myQuestions.forEach( (currentQuestion, questionNumber) => {
             // find selected answer
             const answerContainer = answerContainers[questionNumber];
             const selector = 'input[name=question'+questionNumber+']:checked';
             const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
             // if answer is correct
             if(userAnswer === currentQuestion.correctAnswer){
                 // add to the number of correct answers
@@ -93,13 +97,20 @@
                 answerContainers[questionNumber].style.color = 'lightgreen';
             }
             // if answer is wrong or blank
-            else{
+            else if(userAnswer === undefined){ 
+                //add to the number of blank answers
+                numBlank++;
+
+                // color the answers yellow
+                answerContainers[questionNumber].style.color = 'yellow';
+            }else{
                 // color the answers red
                 answerContainers[questionNumber].style.color = 'red';
             }
         });
         // show number of correct answers out of total
-        resultsContainer.innerHTML = numCorrect + ' out of ' + myQuestions.length;
+        resultsContainer.innerHTML = numCorrect + ' correct, ' + numBlank + ' blank, and ' + (myQuestions.length-numCorrect-numBlank) + ' wrong' + '<br>Your final score is ' + (numCorrect*correctPoints + numBlank*blankPoints + (myQuestions.length-numCorrect-numBlank)*wrongPoints) + ' out of ' + (myQuestions.length*correctPoints) + ' possible points';
+
     }
 
     // display quiz right away
@@ -107,4 +118,4 @@
 
     // on submit, show results
     submitButton.addEventListener('click', showResults);
-})();
+})();    
