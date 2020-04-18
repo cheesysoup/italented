@@ -55,7 +55,7 @@
                 answers.push(
                     `<label>
                         <input type="radio" name="question${questionNumber}" value="${letter}">
-                        ${letter} :
+                        ${letter}:
                         ${currentQuestion.answers[letter]}
                     </label>`
                 );
@@ -63,8 +63,8 @@
     
             // add this question and its answers to the output
             output.push(
-                `<div class="question"> ${currentQuestion.question} </div>
-                <div class="answers"> ${answers.join('')} </div>`
+                `<div class="question"> ${questionNumber + 1}. ${currentQuestion.question} </div>
+                 <div class="answers"> ${answers.join('')} </div>`
             );
         }
         );
