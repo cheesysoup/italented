@@ -1,18 +1,24 @@
-body{
+body {
     font-size: 20px;
     font-family: sans-serif;
     color: #333;
 }
-.question{
+
+#quiz {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+.question {
     font-weight: 600;
 }
 .answers {
     margin-bottom: 20px;
 }
-.answers label{
+.answers label {
     display: block;
 }
-#submit{
+
+#submit {
     font-family: sans-serif;
     font-size: 20px;
     background-color: #279;
@@ -22,7 +28,12 @@ body{
     padding: 10px;
     cursor: pointer;
     margin-bottom: 20px;
+    margin-left: 50px;
 }
-#submit:hover{
+#submit:hover {
     background-color: #38a;
+}
+
+#results {
+    margin-left: 50px;
 }
