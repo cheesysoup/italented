@@ -36,7 +36,8 @@
 
     function buildQuiz() {
         let quiz = ``;
-        questions.forEach((question, i) => {
+        for (let i = 0; i < questions.length; i++) {
+            const question = questions[i];
             let answers = ``;
             for (answer in question.answers) {
                 answers += 
@@ -48,7 +49,7 @@
             quiz +=
                 `<div class="question"> ${i + 1}. ${question.question} </div>
                  <div class="answers"> ${answers} </div>`;
-        });
+        }
         $('#quiz').html(quiz);
     }
 
@@ -56,21 +57,25 @@
         let answerContainers = $('#quiz').find('.answers');
         let numCorrect = 0;
         let numBlank = 0;
-        questions.forEach((question, i) => {
+        for (let i = 0; i < questions.length; i++) {
+            const question = questions[i];
             let container = answerContainers[i];
-            const selector = `input[name=question${i}]:checked`;
-            const userAnswer = ($(container).find(selector)[0] || {}).value;
+            let userAnswer = null;
+            const selected = $(container).find(`input[name=question${i}]:checked`);
+            if (selected.length > 0) {
+                userAnswer = selected[0].value;
+            }
             if (userAnswer === question.correctAnswer) {
                 numCorrect++;
                 container.style.color = 'lightgreen';
-            } else if (userAnswer === undefined) { 
+            } else if (userAnswer === null) {
                 numBlank++;
                 container.style.color = 'yellow';
             } else {
                 container.style.color = 'red';
             }
-        });
-        let numWrong = questions.length-numCorrect-numBlank;
+        }
+        let numWrong = questions.length - numCorrect - numBlank;
         let totalPoints = questions.length * correctPoints;
         let score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
         $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
