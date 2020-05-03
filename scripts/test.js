@@ -9,7 +9,7 @@
             answers: {
                 a: "\\(2\\)",
                 b: "Wrong",
-                c: "Right"
+                c: "Right",
             },
             correctAnswer: "c"
         },
@@ -46,6 +46,11 @@
                         ${answer}: ${question.answers[answer]}
                     </label>`;
             }
+            answers += 
+                    `<label>
+                        <input type="radio" name="question${i}" value="${answer}">
+                        Leave blank
+                    </label>`;
             quiz +=
                 `<div class="question"> ${i + 1}. ${question.question} </div>
                  <div class="answers"> ${answers} </div>`;
