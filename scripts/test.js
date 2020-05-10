@@ -1,4 +1,4 @@
-(function(){
+(function() {
     const correctPoints = 6;
     const blankPoints = 1.5;
     const wrongPoints = 0;
@@ -48,7 +48,7 @@
             }
             answers += 
                     `<label>
-                        <input type="radio" name="question${i}" value="${answer}">
+                        <input type="radio" name="question${i}" value="blank" checked="checked">
                         Leave blank
                     </label>`;
             quiz +=
@@ -73,7 +73,7 @@
             if (userAnswer === question.correctAnswer) {
                 numCorrect++;
                 container.style.color = 'lightgreen';
-            } else if (userAnswer === null) {
+            } else if (userAnswer === 'blank') {
                 numBlank++;
                 container.style.color = 'yellow';
             } else {
