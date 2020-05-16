@@ -2,6 +2,7 @@
     const correctPoints = 6;
     const blankPoints = 1.5;
     const wrongPoints = 0;
+    var score = 0;
 
     const questions = [
         {
@@ -77,8 +78,18 @@
         }
         let numWrong = questions.length - numCorrect - numBlank;
         let totalPoints = questions.length * correctPoints;
-        let score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
+        score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
         $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
+        
+
+        //Send score to google sheets database 
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz03OJQN7BVIagsDUFGjRyOR3BF6eUYSOU0ModJygKGVRC_FwNL/exec'
+        const form = document.forms['submit-to-google-sheet']
+        var formData = new FormData();
+        formData.append(`Score`,score);
+        fetch(scriptURL, { method: 'POST', body: formData})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
     }
 
     buildQuiz();
