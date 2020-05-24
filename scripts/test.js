@@ -41,14 +41,16 @@
             let answers = ``;
             for (answer in question.answers) {
                 answers += 
-                    `<label>
+                    `<label class="mc-container">
                         <input type="radio" name="question${i}" value="${answer}">
+                        <span class="mc"></span>
                         ${answer}: ${question.answers[answer]}
                     </label>`;
             }
             answers += 
-                    `<label>
+                    `<label class="mc-container">
                         <input type="radio" name="question${i}" value="blank" checked="checked">
+                        <span class="mc"></span>
                         Leave blank
                     </label>`;
             quiz +=
