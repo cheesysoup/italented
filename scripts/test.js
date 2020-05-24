@@ -55,6 +55,7 @@
     }
 
     function showResults() {
+        var formData = new FormData();
         let answerContainers = $('#quiz').find('.answers');
         let numCorrect = 0;
         let numBlank = 0;
@@ -75,6 +76,8 @@
             } else {
                 container.style.color = 'red';
             }
+
+            formData.append(`Question ${i+1}`,userAnswer);
         }
         let numWrong = questions.length - numCorrect - numBlank;
         let totalPoints = questions.length * correctPoints;
@@ -82,10 +85,9 @@
         $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
         
 
-        //Send score to google sheets database 
+        //Send score to google sheets database https://docs.google.com/spreadsheets/d/123WAd9MmeU7N4dmlNxLXF25SUMYqTYaBgJSWeXQ9ylw/edit?usp=sharing
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz03OJQN7BVIagsDUFGjRyOR3BF6eUYSOU0ModJygKGVRC_FwNL/exec'
         const form = document.forms['submit-to-google-sheet']
-        var formData = new FormData();
         formData.append(`Score`,score);
         fetch(scriptURL, { method: 'POST', body: formData})
         .then(response => console.log('Success!', response))
