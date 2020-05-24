@@ -1,6 +1,12 @@
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 .btn {
   padding: 6px 11px;
-  background: #FFFFFF;
   border: 1px solid #000000;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
@@ -12,6 +18,32 @@
 }
 .btn:hover {
   cursor: pointer;
+}
+
+.short-answer {
+  width: 285px;
+  height: 34px;
+  padding: 0px 10px;
+  border: 1px solid #000000;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.long-answer {
+  width: 285px;
+  height: 50px;
+  padding: 5px 10px;
+  border: 1px solid #000000;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .question {
@@ -46,7 +78,6 @@
 .mc-container input {
   position: absolute;
   opacity: 0;
-  cursor: pointer;
 }
 .mc-container .mc {
   position: absolute;
@@ -54,17 +85,16 @@
   left: 10px;
   width: 15px;
   height: 15px;
-  background: #FFFFFF;
   border-radius: 50%;
   border: 1px solid #000000;
   box-sizing: border-box;
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 .mc-container:hover input ~ .mc {
-  background: #CDCDCD;
+  background: #C4C4C4;
 }
 .mc-container input:checked ~ .mc {
-  background: #CDCDCD;
+  background: #C4C4C4;
 }
 
 #quiz {
@@ -79,4 +109,6 @@
 
 #results {
   margin-left: 50px;
+  margin-bottom: 50px;
+  font-family: Montserrat;
 }
