@@ -3,36 +3,63 @@
     const blankPoints = 1.5;
     const wrongPoints = 0;
 
-    const questions = [
-        {
-            question: "\\(\\frac{x^2}{\\sqrt{2}}\\)?",
-            answers: {
-                a: "\\(2\\)",
-                b: "Wrong",
-                c: "Right",
-            },
-            correctAnswer: "c"
-        },
-        {
-            question: "Question 2?",
-            answers: {
-                a: "Wrong",
-                b: "Wrong",
-                c: "Right"
-            },
-            correctAnswer: "c"
-        },
-        {
-            question: "Question 3?",
-            answers: {
-                a: "Wrong",
-                b: "Wrong",
-                c: "Wrong",
-                d: "Right"
-            },
-            correctAnswer: "d"
-        },
-    ];
+    let questions;
+    switch (new URLSearchParams(window.location.search).get('quiz')) {
+        case '1':
+            questions = [
+                {
+                    question: "\\(\\frac{x^2}{\\sqrt{2}}\\)?",
+                    answers: {
+                        a: "\\(2\\)",
+                        b: "Wrong",
+                        c: "Right",
+                    },
+                    correctAnswer: "c"
+                },
+                {
+                    question: "Question 2?",
+                    answers: {
+                        a: "Wrong",
+                        b: "Wrong",
+                        c: "Right"
+                    },
+                    correctAnswer: "c"
+                },
+                {
+                    question: "Question 3?",
+                    answers: {
+                        a: "Wrong",
+                        b: "Wrong",
+                        c: "Wrong",
+                        d: "Right"
+                    },
+                    correctAnswer: "d"
+                },
+            ];
+            break;
+        case '2':
+            questions = [
+                {
+                    question: "\\(\\frac{x^2}{\\sqrt{2}}\\)?",
+                    answers: {
+                        a: "\\(2\\)",
+                        b: "\\(4\\)",
+                    },
+                    correctAnswer: "a"
+                },
+                {
+                    question: "\\(\\frac{x^4}{\\sqrt{2}}\\)?",
+                    answers: {
+                        a: "\\(3\\)",
+                        b: "\\(5\\)",
+                    },
+                    correctAnswer: "b"
+                },
+            ];
+            break;
+        default:
+            questions = [];
+    }
 
     function buildQuiz() {
         let quiz = ``;
@@ -91,4 +118,8 @@
     buildQuiz();
 
     $('#submit').click(showResults);
-})();    
+})();
+
+function exit() {
+    window.open('dashboard.html');
+}

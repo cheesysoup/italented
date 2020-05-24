@@ -10,7 +10,7 @@ button:focus {
   border: 1px solid #000000;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  font-family: Montserrat;
+  font-family: Montserrat, Arial;
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
@@ -27,7 +27,7 @@ button:focus {
   border: 1px solid #000000;
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  font-family: Montserrat;
+  font-family: Montserrat, Arial;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -40,7 +40,7 @@ button:focus {
   border: 1px solid #000000;
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  font-family: Montserrat;
+  font-family: Montserrat, Arial;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -48,7 +48,7 @@ button:focus {
 
 .question {
   margin-bottom: 15px;
-  font-family: Montserrat;
+  font-family: Montserrat, Arial;
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
@@ -58,7 +58,7 @@ button:focus {
 .answers {
   margin-left: 15px;
   margin-bottom: 40px;
-  font-family: Montserrat;
+  font-family: Montserrat, Arial;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -110,5 +110,5 @@ button:focus {
 #results {
   margin-left: 50px;
   margin-bottom: 50px;
-  font-family: Montserrat;
+  font-family: Montserrat, Arial;
 }
