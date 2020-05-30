@@ -18,7 +18,7 @@ function check(form){
         data: data,
         success: function (o) {
             if (o.correct) {
-                openDashboard(user);
+                openDashboard(user, pswrd);
             } else {
                 alert("Inncorect username or password");
             }
@@ -26,6 +26,6 @@ function check(form){
     });
 }
 
-function openDashboard(user) {
-    location.href = 'dashboard.html?user=' + user;
+function openDashboard(user, pswrd) {
+    location.href = `dashboard.html?user=${user}&pswrd=${pswrd}`;
 }

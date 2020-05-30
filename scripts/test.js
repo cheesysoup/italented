@@ -1,3 +1,10 @@
+function exit() {
+    let urlParser = new URLSearchParams(window.location.search);
+    let user = urlParser.get('user');
+    let pswrd = urlParser.get('pswrd');
+    location.href = `dashboard.html?user=${user}&pswrd=${pswrd}`;
+}
+
 (function() {
     const correctPoints = 6;
     const blankPoints = 1.5;
@@ -119,7 +126,3 @@
 
     $('#submit').click(showResults);
 })();
-
-function exit() {
-    window.open('dashboard.html');
-}

@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Montserrat;
+  src: url(../fonts/Montserrat/Montserrat-Regular.ttf);
+}
 input:focus,
 select:focus,
 textarea:focus,
@@ -15,6 +19,7 @@ button:focus {
   font-size: 18px;
   line-height: 22px;
   color: #000000;
+  background-color: #FFFFFF;
 }
 .btn:hover {
   cursor: pointer;
