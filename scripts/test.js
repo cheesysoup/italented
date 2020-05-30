@@ -3,36 +3,17 @@
     const blankPoints = 1.5;
     const wrongPoints = 0;
 
-    const questions = [
-        {
-            question: "\\(\\frac{x^2}{\\sqrt{2}}\\)?",
-            answers: {
-                a: "\\(2\\)",
-                b: "Wrong",
-                c: "Right",
-            },
-            correctAnswer: "c"
-        },
-        {
-            question: "Question 2?",
-            answers: {
-                a: "Wrong",
-                b: "Wrong",
-                c: "Right"
-            },
-            correctAnswer: "c"
-        },
-        {
-            question: "Question 3?",
-            answers: {
-                a: "Wrong",
-                b: "Wrong",
-                c: "Wrong",
-                d: "Right"
-            },
-            correctAnswer: "d"
-        },
-    ];
+    var json;
+    let request = new XMLHttpRequest(); // only works on local server, not file
+    request.overrideMimeType("application/json");
+    request.open("GET", "../questions.json", false); // synchronous request is deprecated but I haven't found any other way yet
+    request.onreadystatechange = function() {
+        if(request.status === 200 && request.readyState === 4) {
+            json = request.responseText;
+        }
+    };
+    request.send(null);
+    const questions = JSON.parse(json);
 
     function buildQuiz() {
         let quiz = ``;
