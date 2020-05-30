@@ -3,9 +3,9 @@
     const blankPoints = 1.5;
     const wrongPoints = 0;
 
-    var data;
-    function test(json) {
-        data = JSON.parse(json);
+    var parsedQuestions;
+    function parseQuestions(questions) {
+        parsedQuestions = JSON.parse(questions);
     }
     function getQuestions(callback) {
         let request = new XMLHttpRequest(); // only works on local server, not file
@@ -18,8 +18,8 @@
         };
         request.send(null);
     }
-    getQuestions(test);
-    const questions = data;
+    getQuestions(parseQuestions);
+    const questions = parsedQuestions;
 
     function buildQuiz() {
         let quiz = ``;
