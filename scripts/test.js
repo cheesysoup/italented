@@ -3,23 +3,17 @@
     const blankPoints = 1.5;
     const wrongPoints = 0;
 
-    var parsedQuestions;
-    function parseQuestions(questions) {
-        parsedQuestions = JSON.parse(questions);
-    }
-    function getQuestions(callback) {
-        let request = new XMLHttpRequest(); // only works on local server, not file
-        request.overrideMimeType("application/json");
-        request.open("GET", "../questions.json", true);
-        request.onreadystatechange = function() {
-            if(request.status === 200 && request.readyState === 4) {
-                callback(request.responseText);
-            }
-        };
-        request.send(null);
-    }
-    getQuestions(parseQuestions);
-    const questions = parsedQuestions;
+    var json;
+    let request = new XMLHttpRequest(); // only works on local server, not file
+    request.overrideMimeType("application/json");
+    request.open("GET", "../questions.json", false); // synchronous request is deprecated but I haven't found any other way yet
+    request.onreadystatechange = function() {
+        if(request.status === 200 && request.readyState === 4) {
+            json = request.responseText;
+        }
+    };
+    request.send(null);
+    const questions = JSON.parse(json);
 
     function buildQuiz() {
         let quiz = ``;
