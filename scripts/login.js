@@ -20,7 +20,7 @@ function check(form){
             if (o.correct) {
                 openDashboard(user, pswrd);
             } else {
-                alert("Inncorect username or password");
+                alert("Incorrect username or password");
             }
         }
     });
