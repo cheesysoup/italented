@@ -1,6 +1,6 @@
 function logout() {
-    let user = localStorage.setItem("username",null);
-    let pswrd = localStorage.setItem("password",null);
+    let user = localStorage.setItem("username","");
+    let pswrd = localStorage.setItem("password","");
     location.href = `../index.html`;
 }
 
@@ -13,6 +13,10 @@ function loadQuiz(q) {
 (function() {
     let user = localStorage.getItem("username");
     let pswrd = localStorage.getItem("password");
+
+    if (user == "" || pswrd == ""){
+        location.href = `../index.html`;
+    }
 
     const url = 'https://script.google.com/macros/s/AKfycbyac8xl_AXEjl4OIgFwNGvToDNRf7kWwsl3HO0YNBSvwsjMeSY/exec';
     let data = {};
