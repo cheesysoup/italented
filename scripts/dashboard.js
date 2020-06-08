@@ -1,13 +1,12 @@
 function logout() {
-    let user = localStorage.setItem("username","");
-    let pswrd = localStorage.setItem("password","");
+    localStorage.setItem("username","");
+    localStorage.setItem("password","");
     location.href = `../index.html`;
 }
 
 function loadQuiz(q) {
-    let user = localStorage.getItem("username");
-    let pswrd = localStorage.getItem("password");
-    location.href = `test.html?quiz=${q}`;
+    localStorage.setItem("quiz", q);
+    location.href = `test.html`;
 }
 
 (function() {

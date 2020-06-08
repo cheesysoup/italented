@@ -1,6 +1,5 @@
 function exit() {
-    let user = localStorage.getItem("username");
-    let pswrd = localStorage.getItem("password");
+    localStorage.setItem("quiz", "");
     location.href = `dashboard.html`;
 }
 
@@ -8,10 +7,11 @@ function exit() {
     const correctPoints = 6;
     const blankPoints = 1.5;
     const wrongPoints = 0;
-    var score = 0;
+
+    let quiz = localStorage.getItem("quiz");
 
     let questions;
-    switch (new URLSearchParams(window.location.search).get('quiz')) {
+    switch (quiz) {
         case '1':
             questions = [
                 {
@@ -121,11 +121,9 @@ function exit() {
         }
         let numWrong = questions.length - numCorrect - numBlank;
         let totalPoints = questions.length * correctPoints;
-        score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
+        let score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
         $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
         
-
-        //Send score to google sheets database https://docs.google.com/spreadsheets/d/123WAd9MmeU7N4dmlNxLXF25SUMYqTYaBgJSWeXQ9ylw/edit?usp=sharing
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz03OJQN7BVIagsDUFGjRyOR3BF6eUYSOU0ModJygKGVRC_FwNL/exec'
         const form = document.forms['submit-to-google-sheet']
         formData.append(`Score`,score);
