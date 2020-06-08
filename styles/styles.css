@@ -118,32 +118,32 @@ button:focus {
   font-family: Montserrat, Arial;
 }
 
-#login {
+#login-container {
   margin: auto;
   margin-top: calc(50vh - 200px);
   width: 310px;
   height: 400px;
 }
-#login .label {
+#login-container .label {
   margin-bottom: 15px;
   font-family: Montserrat, Arial;
   font-size: 16px;
   line-height: 20px;
 }
-#login input {
+#login-container input {
   margin-bottom: 37px;
 }
-#login #login-btn {
+#login-container #login-btn {
   margin: auto;
   margin-bottom: 106px;
   width: 76px;
   height: 36px;
 }
-#login #exit {
+#login-container #exit {
   margin: auto;
   width: 30px;
   height: 30px;
 }
-#login #exit:hover {
+#login-container #exit:hover {
   cursor: pointer;
 }

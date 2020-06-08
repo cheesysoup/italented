@@ -12,14 +12,14 @@
 
     <body>
     <div class="body"></div>
-        <div id="login">
+        <div id="login-container">
             <form name="login">
                 <div class="label">Username</div>
                 <input type="text" name="userid" class="short-answer"><br>
                 <div class="label">Password</div>
                 <input type="password" name="pswrd" class="short-answer"><br>
                 <div id="login-btn">
-                    <button onclick="check(this.form)" class="btn">Login</button>
+                    <input type="button" onclick="check(this.form)" value="Login" class="btn"/>
                 </div>
             </form>
             <div id="exit" onclick="exit()">
