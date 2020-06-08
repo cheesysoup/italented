@@ -28,6 +28,10 @@ function check(form){
 
 function openDashboard(user, pswrd) {
     location.href = `dashboard.html`;
-    localStorage.setItem("username",user);
-    localStorage.setItem("password",pswrd);
+    localStorage.setItem("username", user);
+    localStorage.setItem("password", pswrd);
+}
+
+function exit() {
+    location.href = '../index.html';
 }
