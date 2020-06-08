@@ -1,8 +1,7 @@
 function exit() {
-    let urlParser = new URLSearchParams(window.location.search);
-    let user = urlParser.get('user');
-    let pswrd = urlParser.get('pswrd');
-    location.href = `dashboard.html?user=${user}&pswrd=${pswrd}`;
+    let user = localStorage.getItem("username");
+    let pswrd = localStorage.getItem("password");
+    location.href = `dashboard.html`;
 }
 
 (function() {

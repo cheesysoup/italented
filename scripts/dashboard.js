@@ -1,17 +1,18 @@
 function logout() {
+    let user = localStorage.setItem("username",null);
+    let pswrd = localStorage.setItem("password",null);
     location.href = `../index.html`;
 }
 
 function loadQuiz(q) {
-    let urlParser = new URLSearchParams(window.location.search);
-    let user = urlParser.get('user');
-    let pswrd = urlParser.get('pswrd');
-    location.href = `test.html?quiz=${q}&user=${user}&pswrd=${pswrd}`;
+    let user = localStorage.getItem("username");
+    let pswrd = localStorage.getItem("password");
+    location.href = `test.html?quiz=${q}`;
 }
 
 (function() {
-    let user = new URLSearchParams(window.location.search).get('user');
-    let pswrd = new URLSearchParams(window.location.search).get('pswrd');
+    let user = localStorage.getItem("username");
+    let pswrd = localStorage.getItem("password");
 
     const url = 'https://script.google.com/macros/s/AKfycbyac8xl_AXEjl4OIgFwNGvToDNRf7kWwsl3HO0YNBSvwsjMeSY/exec';
     let data = {};

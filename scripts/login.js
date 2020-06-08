@@ -27,5 +27,7 @@ function check(form){
 }
 
 function openDashboard(user, pswrd) {
-    location.href = `dashboard.html?user=${user}&pswrd=${pswrd}`;
+    location.href = `dashboard.html`;
+    localStorage.setItem("username",user);
+    localStorage.setItem("password",pswrd);
 }
