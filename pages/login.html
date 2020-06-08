@@ -5,24 +5,25 @@
         <title>Login</title>
 
         <link rel="stylesheet" href="../styles/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
     </head>
 
     <body>
     <div class="body"></div>
-        <div class="grad"></div>
-        <div class="header">
-            <div>Please Login</div>
-            </div>
-            <br>
+        <div id="login">
             <form name="login">
-            <div class="login">
-                <div>Username</div>
-                <input type="text" placeholder="username" name="userid"><br>
-                <div>Password</div>
-                <input type="password" placeholder="password" name="pswrd"><br>
-                <input type="button" onclick="check(this.form)" value="Login"/>
-            </div>
+                <div class="label">Username</div>
+                <input type="text" name="userid" class="short-answer"><br>
+                <div class="label">Password</div>
+                <input type="password" name="pswrd" class="short-answer"><br>
+                <div id="login-btn">
+                    <button onclick="check(this.form)" class="btn">Login</button>
+                </div>
             </form>
+            <div id="exit" onclick="exit()">
+                <img src="../images/exit.svg"/>
+            </div>
+        </div>
 
         <script src="../scripts/login.js"></script>
     </body>

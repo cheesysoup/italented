@@ -5,3 +5,7 @@ function check(form){
         alert("Inncorect username or password")
     }
 }
+
+function exit() {
+    location.href = '../index.html';
+}
