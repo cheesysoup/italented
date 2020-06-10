@@ -55,6 +55,7 @@
                     </label>`;
             quiz +=
                 `<div class="question"> ${i + 1}. ${question.question} </div>
+                <div><img id="x" src="../images/${i + 1}.jpg">  </div>
                  <div class="answers"> ${answers} </div>`;
         }
         $('#quiz').html(quiz);
