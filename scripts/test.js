@@ -1,38 +1,72 @@
+function exit() {
+    localStorage.setItem("quiz", "");
+    location.href = `dashboard.html`;
+}
+
 (function() {
     const correctPoints = 6;
     const blankPoints = 1.5;
     const wrongPoints = 0;
 
-    const questions = [
-        {
-            question: "\\(\\frac{x^2}{\\sqrt{2}}\\)?",
-            answers: {
-                a: "\\(2\\)",
-                b: "Wrong",
-                c: "Right",
-            },
-            correctAnswer: "c"
-        },
-        {
-            question: "Question 2?",
-            answers: {
-                a: "Wrong",
-                b: "Wrong",
-                c: "Right"
-            },
-            correctAnswer: "c"
-        },
-        {
-            question: "Question 3?",
-            answers: {
-                a: "Wrong",
-                b: "Wrong",
-                c: "Wrong",
-                d: "Right"
-            },
-            correctAnswer: "d"
-        },
-    ];
+    let quiz = localStorage.getItem("quiz");
+
+    let questions;
+    switch (quiz) {
+        case '1':
+            questions = [
+                {
+                    question: "\\(\\frac{x^2}{\\sqrt{2}}\\)?",
+                    answers: {
+                        a: "\\(2\\)",
+                        b: "Wrong",
+                        c: "Right",
+                    },
+                    correctAnswer: "c"
+                },
+                {
+                    question: "Question 2?",
+                    answers: {
+                        a: "Wrong",
+                        b: "Wrong",
+                        c: "Right"
+                    },
+                    correctAnswer: "c"
+                },
+                {
+                    question: "Question 3?",
+                    answers: {
+                        a: "Wrong",
+                        b: "Wrong",
+                        c: "Wrong",
+                        d: "Right"
+                    },
+                    correctAnswer: "d"
+                },
+            ];
+            break;
+        case '2':
+            questions = [
+                {
+                    question: "\\(\\frac{x^2}{\\sqrt{2}}\\)?",
+                    answers: {
+                        a: "\\(2\\)",
+                        b: "\\(4\\)",
+                    },
+                    correctAnswer: "a"
+                },
+                {
+                    question: "\\(\\frac{x^4}{\\sqrt{2}}\\)?",
+                    answers: {
+                        a: "\\(3\\)",
+                        b: "\\(5\\)",
+                    },
+                    correctAnswer: "b"
+                },
+            ];
+            break;
+        default:
+            questions = [];
+    }
 
     function buildQuiz() {
         let quiz = ``;
@@ -62,6 +96,7 @@
     }
 
     function showResults() {
+        var formData = new FormData();
         let answerContainers = $('#quiz').find('.answers');
         let numCorrect = 0;
         let numBlank = 0;
@@ -82,14 +117,23 @@
             } else {
                 container.style.color = 'red';
             }
+
+            formData.append(`Question ${i+1}`,userAnswer);
         }
         let numWrong = questions.length - numCorrect - numBlank;
         let totalPoints = questions.length * correctPoints;
         let score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
         $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
+        
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz03OJQN7BVIagsDUFGjRyOR3BF6eUYSOU0ModJygKGVRC_FwNL/exec'
+        const form = document.forms['submit-to-google-sheet']
+        formData.append(`Score`,score);
+        fetch(scriptURL, { method: 'POST', body: formData})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
     }
 
     buildQuiz();
 
     $('#submit').click(showResults);
-})();    
+})();

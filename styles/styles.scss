@@ -1,4 +1,9 @@
-$font: Montserrat;
+@font-face {
+    font-family: Montserrat;
+    src: url(../fonts/Montserrat/Montserrat-Regular.ttf);
+}
+
+$font: Montserrat, Arial;
 $white: #FFFFFF;
 $black: #000000;
 $gray: #C4C4C4;
@@ -6,3 +11,5 @@ $gray: #C4C4C4;
 @import "presets";
 
 @import "quiz";
+
+@import "login";
