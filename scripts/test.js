@@ -86,15 +86,20 @@
         
 
         //Send score to google sheets database https://docs.google.com/spreadsheets/d/123WAd9MmeU7N4dmlNxLXF25SUMYqTYaBgJSWeXQ9ylw/edit?usp=sharing
+        $("#loadSubmission").show();
+
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz03OJQN7BVIagsDUFGjRyOR3BF6eUYSOU0ModJygKGVRC_FwNL/exec'
         const form = document.forms['submit-to-google-sheet']
         formData.append(`Score`,score);
         fetch(scriptURL, { method: 'POST', body: formData})
-        .then(response => console.log('Success!', response))
+        .then(response => finish(response))
         .catch(error => console.error('Error!', error.message))
     }
 
+    function finish(response){
+        console.log('Success!', response);
+        $("#loadSubmission").hide();
+    }
     buildQuiz();
-
     $('#submit').click(showResults);
 })();    
