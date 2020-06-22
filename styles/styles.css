@@ -135,12 +135,19 @@ button:focus {
 }
 #login-container #login-btn {
   margin: auto;
-  margin-bottom: 106px;
+  margin-bottom: 45px;
   width: 76px;
   height: 36px;
 }
+#login-container #loadLogin {
+  display: block;
+  margin: auto;
+  width: 28px;
+  height: 28px;
+}
 #login-container #exit {
   margin: auto;
+  margin-top: 120px;
   width: 30px;
   height: 30px;
 }
