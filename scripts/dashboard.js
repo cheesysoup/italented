@@ -11,6 +11,7 @@ function loadQuiz(q) {
 }
 
 (function() {
+    $("#loadButtons").show();
     let user = localStorage.getItem("username");
     let pswrd = localStorage.getItem("password");
 
@@ -36,6 +37,7 @@ function loadQuiz(q) {
                 }
             }
             $('#quizButtons').html(quizButtons);
+            $("#loadButtons").hide();
         }
     });
 })();

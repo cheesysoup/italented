@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <title>Dashboard</title>
 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         <link rel="stylesheet" href="../styles/styles.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -11,6 +13,9 @@
 
     <body>
         <button class="btn" onclick="logout();">Logout</button>
+        <div class="spinner-border" id="loadButtons" role="status" style="display: none">
+            <span class="sr-only">Loading...</span>
+        </div>
         <div id="quizButtons"></div>
 
         <script src="../scripts/dashboard.js"></script>

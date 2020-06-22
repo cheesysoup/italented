@@ -1,8 +1,10 @@
 function check(form){
+    $("#loadLogin").show();
     const user = form.userid.value;
     const pswrd = form.pswrd.value;
 
     if (user == '') {
+        $("#loadLogin").hide();
         alert("Please enter a username");
         return;
     }
@@ -17,6 +19,7 @@ function check(form){
         dataType: "json",
         data: data,
         success: function (o) {
+            $("#loadLogin").hide();
             if (o.correct) {
                 openDashboard(user, pswrd);
             } else {
