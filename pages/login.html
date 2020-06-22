@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <title>Login</title>
 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         <link rel="stylesheet" href="../styles/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
 
@@ -22,6 +24,9 @@
                     <input type="button" onclick="check(this.form)" value="Login" class="btn"/>
                 </div>
             </form>
+            <div class="spinner-border" id="loadLogin" role="status" style="display: none">
+                <span class="sr-only">Loading...</span>
+            </div>
             <div id="exit" onclick="exit()">
                 <img src="../images/exit.svg"/>
             </div>
