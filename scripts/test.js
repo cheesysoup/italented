@@ -116,7 +116,6 @@
         let numWrong = 0;
 
        let allShortAnswersBoxes = $('#shortAnswersQuiz').find('.shortAnswersBoxes');
-       console.log(allShortAnswersBoxes);
 
        let allShortAnswers = [];
        for (let i = 0; i < shortAnswerQuestions.length; i++) {
@@ -128,21 +127,17 @@
 
            let alreadyWrong = false;
            for (let j = 0; j < shortAnswerQuestions[i].correctAnswer.length; j++) {
-               console.log("ANSWER, CORRECT ANSWER: " + answer + " " + shortAnswerQuestions[i].correctAnswer[j]);
                if (answer === shortAnswerQuestions[i].correctAnswer[j]) {
-                   console.log("CORRECT");
                    numCorrect ++;
                    document.getElementsByName(`shortAnswers${i}`)[0].style.border = '2px solid lightgreen';
                    break;
                } else if (answer === '') {
-                   console.log("BLANK");
                    numBlank++;
                    document.getElementsByName(`shortAnswers${i}`)[0].style.border = '2px solid yellow';
                    break;
                } else {
                    if (j === shortAnswerQuestions[i].correctAnswer.length-1) {
                         alreadyWrong = true;
-                        console.log("incorrect");
                         numWrong++;
                         document.getElementsByName(`shortAnswers${i}`)[0].style.border = '2px solid red';
                    }
@@ -152,14 +147,12 @@
        }
 
        let results = [numCorrect,numBlank,numWrong];
-       console.log(results);
        return results;
    }
 
    // show results
     function showResults() {
         let answerContainers = $('#quiz').find('.answers');
-        console.log(answerContainers);
         let numCorrect = 0;
         let numBlank = 0;
         for (let i = 0; i < questions.length; i++) {
@@ -167,7 +160,6 @@
             let container = answerContainers[i];
             let userAnswer = null;
             const selected = $(container).find(`input[name=question${i}]:checked`);
-            console.log(`input[name=question${i}]:checked`);
             if (selected.length > 0) {
                 userAnswer = selected[0].value;
             }
