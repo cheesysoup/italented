@@ -4,13 +4,35 @@ body {
     color: #333;
 }
 
+.question,.shortAnswerQuestions,.shortAnswersBoxes,.answers,#submit,#results {
+    font-family: sans-serif;
+}
+
 #quiz {
     margin-top: 50px;
     margin-left: 50px;
 }
+
+#shortAnswersQuiz {
+    margin-left: 50px;
+}
+
+.shortAnswersBoxes {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    width: 300px;
+    height: 30px;
+    font-size: 20px;
+}
 .question {
     font-weight: 600;
+    margin-bottom: 5px;
 }
+
+.shortAnswerQuestions{
+    font-weight: 600;
+}
+
 .answers {
     margin-bottom: 20px;
 }
@@ -36,4 +58,5 @@ body {
 
 #results {
     margin-left: 50px;
+    margin-bottom: 20px;
 }
