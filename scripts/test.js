@@ -4,6 +4,12 @@ function exit() {
 }
 
 (function() {
+    // checks that user has logged in
+    if (!localStorage.getItem("username")) {
+        localStorage.setItem("quiz", "");
+        location.href = `../index.html`;
+    }
+
     const correctPoints = 6;
     const blankPoints = 1.5;
     const wrongPoints = 0;
@@ -89,7 +95,7 @@ function exit() {
                     </label>`;
             quiz +=
                 `<div class="question"> ${i + 1}. ${question.question} </div>
-                <div><img id="x" src="../images/${i + 1}.jpg">  </div>
+                 <div><img id="x" src="../images/${i + 1}.jpg">  </div>
                  <div class="answers"> ${answers} </div>`;
         }
         $('#quiz').html(quiz);
@@ -97,6 +103,9 @@ function exit() {
 
     function showResults() {
         var formData = new FormData();
+        formData.append(`User`, localStorage.getItem("username"));
+        formData.append(`Quiz`, localStorage.getItem("quiz"));
+        
         let answerContainers = $('#quiz').find('.answers');
         let numCorrect = 0;
         let numBlank = 0;
@@ -138,6 +147,7 @@ function exit() {
         console.log('Success!', response);
         $("#loadSubmission").hide();
     }
+
     buildQuiz();
     $('#submit').click(showResults);
 })();
