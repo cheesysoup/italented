@@ -7,7 +7,9 @@ function exit() {
     const correctPoints = 6;
     const blankPoints = 1.5;
     const wrongPoints = 0;
-
+    var Time = 0;
+    var finished = false;
+    
     let quiz = localStorage.getItem("quiz");
 
     let questions;
@@ -69,6 +71,13 @@ function exit() {
     }
 
     function buildQuiz() {
+        //Building timer/counter
+        var Count = setInterval(function(){
+            if (finished == false)
+            ++Time;
+            document.getElementById("timer").innerHTML = "Time Elapsed: " + new Date(Time * 1000).toISOString().substr(11,8);
+        }, 1000)
+
         let quiz = ``;
         for (let i = 0; i < questions.length; i++) {
             const question = questions[i];
@@ -100,6 +109,11 @@ function exit() {
         let answerContainers = $('#quiz').find('.answers');
         let numCorrect = 0;
         let numBlank = 0;
+
+        //Time taken for the test
+        finished = true;
+        formData.append(`Time`, new Date(Time * 1000).toISOString().substr(11,8));
+
         for (let i = 0; i < questions.length; i++) {
             const question = questions[i];
             let container = answerContainers[i];
