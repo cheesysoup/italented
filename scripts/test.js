@@ -82,7 +82,7 @@
         buildAllShortAnswers(numOfMult);
     }
 
-    // build short one short answer question
+    // build one short answer question
     function buildShortAnswersOneByOne(questionNumber,numOfMult) {
         let shortAnswersQuiz = '';
         let shortAnswersInput = '';
@@ -122,6 +122,9 @@
             allShortAnswers.push(document.getElementsByName(`shortAnswers${i}`)[0].value);
        }
        for (let i = 0; i < allShortAnswers.length; i++) {
+            // lock short answer boxes
+            document.getElementsByName(`shortAnswers${i}`)[0].disabled = true;
+
            let answer = allShortAnswers[i];
            let answerBoxId = "answerBox${questionNumber}";
 
@@ -150,7 +153,7 @@
        return results;
    }
 
-   // show results
+    // show results
     function showResults() {
         let answerContainers = $('#quiz').find('.answers');
         let numCorrect = 0;
@@ -160,6 +163,12 @@
             let container = answerContainers[i];
             let userAnswer = null;
             const selected = $(container).find(`input[name=question${i}]:checked`);
+
+            // lock radio buttons
+            for (let j = 0; j < Object.keys(question.answers).length; j++) {
+                document.getElementsByName(`question${i}`)[j].disabled = true;
+            }
+
             if (selected.length > 0) {
                 userAnswer = selected[0].value;
             }
