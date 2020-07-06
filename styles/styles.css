@@ -102,22 +102,6 @@ button:focus {
   background: #C4C4C4;
 }
 
-#quiz {
-  margin-top: 50px;
-  margin-left: 50px;
-}
-
-#submit {
-  margin-bottom: 20px;
-  margin-left: 50px;
-}
-
-#results {
-  margin-left: 50px;
-  margin-bottom: 50px;
-  font-family: Montserrat, Arial;
-}
-
 #login-container {
   margin: auto;
   margin-top: calc(50vh - 200px);
@@ -152,5 +136,76 @@ button:focus {
   height: 30px;
 }
 #login-container #exit:hover {
+  cursor: pointer;
+}
+
+#quiz {
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+#submit {
+  margin-bottom: 20px;
+  margin-left: 50px;
+}
+
+#results {
+  margin-left: 50px;
+  margin-bottom: 50px;
+  font-family: Montserrat, Arial;
+}
+
+#admin-login-container {
+  margin: auto;
+  margin-top: calc(50vh - 200px);
+  width: 310px;
+  height: 400px;
+}
+#admin-login-container .label {
+  margin-bottom: 15px;
+  font-family: Montserrat, Arial;
+  font-size: 16px;
+  line-height: 20px;
+}
+#admin-login-container input {
+  margin-bottom: 37px;
+}
+#admin-login-container #admin-login-btn {
+  margin: auto;
+  margin-bottom: 45px;
+  width: 76px;
+  height: 36px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
   cursor: pointer;
 }
