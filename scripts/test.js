@@ -42,7 +42,7 @@
                 if (selected.length > 0) {
                     userAnswer = selected[0].value;
                 }
-                if (userAnswer === question.correctAnswer) {
+                if (userAnswer === question.answer) {
                     numCorrect++;
                     container.style.color = 'lightgreen';
                 } else if (userAnswer === 'blank') {
@@ -64,16 +64,15 @@
     }
 
     function getQuestions(callback) {
-        let request = new XMLHttpRequest(); // only works on local server, not file
-        request.overrideMimeType("application/json");
-        request.open("GET", "../questions.json", true);
-        request.onreadystatechange = function() {
-            if(request.status === 200 && request.readyState === 4) {
-                let questions = JSON.parse(request.responseText);
-                callback(questions);
-            }
-        };
-        request.send(null);
+        const url = 'https://script.google.com/macros/s/AKfycbwoTxPRGLrIFBhwZCHVl4sqE9mVwDdB6znxXbmDztzD6-bmU8Ct/exec';
+        $.ajax({
+            url: url,
+            method: "GET",
+            dataType: "json"
+        })
+        .done(function(data) {
+            callback(data.questions);
+        });
     }
     
     getQuestions(setup);
