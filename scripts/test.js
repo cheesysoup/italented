@@ -9,9 +9,9 @@ function exit() {
     const wrongPoints = 0;
 
     //Time in seconds for countdown timer
-    var totalTime = 5;
+    var totalTime = 3600;
 
-    var Time = totalTime;
+    var time = totalTime;
     var finished = false;
     
     let quiz = localStorage.getItem("quiz");
@@ -77,15 +77,15 @@ function exit() {
     function buildQuiz() {
         //Building timer/counter
         var Count = setInterval(function(){
-            if (finished == false && Time == 0){
+            if (finished == false && time == 0){
                 finished = true;
                 showResults();
                 location.href = `dashboard.html`;
                 alert("Test Finished: Answers have been submitted");
             }
             if (finished == false)
-            --Time;
-            document.getElementById("timer").innerHTML = "Time Left: " + new Date(Time * 1000).toISOString().substr(11,8);
+            --time;
+            document.getElementById("timer").innerHTML = "Time Left: " + new Date(time * 1000).toISOString().substr(11,8);
         }, 1000)
 
         let quiz = ``;
@@ -122,7 +122,7 @@ function exit() {
 
         //Time taken for the test
         finished = true;
-        formData.append(`Time`, new Date((totalTime - Time) * 1000).toISOString().substr(11,8));
+        formData.append(`Time`, new Date((totalTime - time) * 1000).toISOString().substr(11,8));
 
         for (let i = 0; i < questions.length; i++) {
             const question = questions[i];
