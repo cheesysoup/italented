@@ -24,9 +24,15 @@
 
         <div id="admin-portal">
             <div><b>Students</b></div>
-            <button class="btn" onclick="addStudentModal();">Add Student</button>
+            <button class="btn" onclick="addModal('new-student');">Add Student</button>
             <div id="student-list"></div>
+            <div style="height: 50px"></div> <!-- DELETE -->
+            <div><b>Quizzes</b></div>
+            <button class="btn" onclick="addModal('new-quiz');">Add Quiz</button>
+            <div id="quiz-list"></div>
         </div>
+
+        <div id="quiz-details"></div>
 
         <div id="new-student" class="modal">
             <div class="modal-content">
@@ -36,6 +42,25 @@
                 <div>Last Name</div>
                 <input type="text" id="last" class="short-answer"><br>
                 <input type="button" onclick="addStudent();" value="OK" class="btn"/>
+            </div>
+        </div>
+
+        <div id="new-quiz" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div>Quiz Name</div>
+                <input type="text" id="quiz-name" class="short-answer"><br>
+                <div>Time Limit</div>
+                <input type="text" id="time-limit" class="short-answer"><br>
+                <input type="button" onclick="addQuiz();" value="OK" class="btn"/>
+            </div>
+        </div>
+
+        <div id="assign-quiz" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="assign-quiz-students"></div>
+                <input type="button" onclick="assignQuiz();" value="OK" class="btn"/>
             </div>
         </div>
 

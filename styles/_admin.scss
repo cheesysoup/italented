@@ -24,6 +24,14 @@
     }
 }
 
+#quiz-list {
+    div {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
 .modal {
     display: none;
     position: fixed;

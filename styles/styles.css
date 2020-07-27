@@ -177,6 +177,10 @@ button:focus {
   height: 36px;
 }
 
+#quiz-list div:hover {
+  cursor: pointer;
+}
+
 .modal {
   display: none;
   position: fixed;
