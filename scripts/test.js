@@ -205,6 +205,7 @@ function exit() {
         // populate components
         buildQuiz();
         $('#submit').click(showResults);
+        MathJax.typeset()
     }
 
     function getQuestions(callback) {
