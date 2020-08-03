@@ -27,17 +27,15 @@ function loadQuiz(q) {
         dataType: "json",
         data: data,
         success: function (o) {
-            console.log(o);
-            // const quizNames = o.quizzes[0];
-            // const quizzes = o.quizzes[1];
-            // let quizButtons = '';
-            // for (let i = 0; i < quizzes.length; i++) {
-            //     if (quizzes[i] != '') {
-            //         quizButtons += `<button id="quiz${i + 1}" class="btn" onclick="loadQuiz(${i + 1});">${quizNames[i]}</button>`;
-            //     }
-            // }
-            // $('#quizButtons').html(quizButtons);
-            // $("#loadButtons").hide();
+            let details = o.details;
+            let dashboard = '';
+            for (let i = 1; i < details.length; i++) {
+                if (details[i] != '') {
+                    dashboard += `<button id="quiz${i + 1}" class="btn" onclick="loadQuiz(${i + 1});">${details[i][0]}</button>`;
+                }
+            }
+            $('#quizButtons').html(dashboard);
+            $("#loadButtons").hide();
         }
     });
 })();
