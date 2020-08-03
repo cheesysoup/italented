@@ -9,12 +9,12 @@ function check(form){
         return;
     }
 
-    const url = 'https://script.google.com/macros/s/AKfycbyac8xl_AXEjl4OIgFwNGvToDNRf7kWwsl3HO0YNBSvwsjMeSY/exec';
+    const userUrl = 'https://script.google.com/macros/s/AKfycbwqvNVeFbXM7mRUniqGfoO-KDfCNn0dpWZH1COiiLh5SPvs9Ig/exec';
     let data = {};
     data['user'] = user;
     data['pswrd'] = pswrd;
     $.ajax({
-        url: url,
+        url: userUrl,
         method: "GET",
         dataType: "json",
         data: data,

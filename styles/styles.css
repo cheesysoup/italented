@@ -177,7 +177,7 @@ button:focus {
   height: 36px;
 }
 
-#quiz-list div:hover {
+#quiz-list div:hover, #student-list div:hover {
   cursor: pointer;
 }
 
