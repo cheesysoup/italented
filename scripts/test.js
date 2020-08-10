@@ -229,10 +229,10 @@ function exit() {
         // populate components
         buildQuiz();
         $('#submit').click(showResults);
+        MathJax.typeset()
         $('#next').click(nextPage);
         $('#previous').click(previousPage);
     }
-
     function nextPage(){
         if (currentPage < totalPages){
             for (let q = 1; q < pageSize+1; q++){
