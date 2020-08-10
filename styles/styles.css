@@ -125,6 +125,14 @@ button:focus {
   margin-left: 50px;
 }
 
+#next {
+  margin-bottom: 20px;
+}
+
+#previous {
+  margin-bottom: 20px;
+}
+
 #results {
   margin-left: 50px;
   margin-bottom: 20px;
