@@ -3,6 +3,19 @@
     margin-left: 50px;
 }
 
+#shortAnswersQuiz {
+    margin-left: 50px;
+}
+
+.shortAnswerQuestions{
+    font-weight: 600;
+    font-family: $font;
+}
+
+.shortAnswersBoxes {
+    margin: 15px 0px 30px 25px;
+}
+
 #submit {
     margin-bottom: 20px;
     margin-left: 50px;
@@ -10,6 +23,6 @@
 
 #results {
     margin-left: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     font-family: $font;
 }
