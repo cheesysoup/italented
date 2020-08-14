@@ -152,14 +152,14 @@ function exit() {
 
         // show results
         function showResults() {
-            var formData = new FormData();
+            var data = {};
             let answerContainers = $('#quiz').find('.answers');
             let numCorrect = 0;
             let numBlank = 0;
 
             //Time taken for the test
             finished = true;
-            formData.append(`Time`, new Date((totalTime - time) * 1000).toISOString().substr(11,8));
+            data[`Time`] = new Date((totalTime - time) * 1000).toISOString().substr(11,8);
 
             for (let i = 0; i < questions.length; i++) {
                 const question = questions[i];
@@ -179,7 +179,7 @@ function exit() {
                     container.style.color = 'red';
                 }
 
-                formData.append(`Question ${i+1}`,userAnswer);
+                data[`Question ${i+1}`] = userAnswer;
             }
 
             getShortAnswerResults();
@@ -193,17 +193,19 @@ function exit() {
             $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
             
             $("#loadSubmission").show();
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbz03OJQN7BVIagsDUFGjRyOR3BF6eUYSOU0ModJygKGVRC_FwNL/exec'
-            const form = document.forms['submit-to-google-sheet']
-            formData.append(`Score`,score);
-            fetch(scriptURL, { method: 'POST', body: formData})
-            .then(response => finish(response))
-            .catch(error => console.error('Error!', error.message))
-        }
-
-        function finish(response){
-            console.log('Success!', response);
-            $("#loadSubmission").hide();
+            data['Score'] = score;
+            data['user'] = localStorage.getItem("username");
+            data['pswrd'] = localStorage.getItem("password");
+            data['quiz'] = localStorage.getItem("quiz");
+            $.ajax({
+                url: 'https://script.google.com/macros/s/AKfycbz7cE2k_h8VMNbfXTiREI5mc-P9xz6hKo59WVHYfk5y7df4GTP8/exec',
+                method: "POST",
+                dataType: "json",
+                data: data,
+                success: function (o) {
+                    $("#loadSubmission").hide();
+                }
+            });
         }
 
         // populate components

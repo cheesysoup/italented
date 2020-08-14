@@ -31,11 +31,12 @@ function loadQuiz(q) {
             let dashboard = '';
             for (let i = 1; i < details.length; i++) {
                 if (details[i] != '') {
-                    dashboard += `<button id="quiz${i + 1}" class="btn" onclick="loadQuiz(${i + 1});">${details[i][0]}</button>`;
+                    dashboard += `<button id="quiz${i + 1}" class="btn" onclick="loadQuiz('${details[i][0]}');">${details[i][0]}</button>`;
                 }
             }
             $('#quizButtons').html(dashboard);
             $("#loadButtons").hide();
+            localStorage.setItem('name', o.student)
         }
     });
 })();
