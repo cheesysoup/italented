@@ -76,10 +76,11 @@ function exit() {
                         <span class="mc"></span>
                         Leave blank
                     </label>`;
-                quiz +=
-                    `<div class="question"> ${i + 1}. ${question.question} </div>
-                    <div><img id="x" src="../images/${i + 1}.jpg">  </div>
-                    <div class="answers">${answers}</div>`;
+                quiz += `<div class="question"> ${i + 1}. ${question.question} </div>`;
+                if (question.image) {
+                    quiz += `<div><img id="x" src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
+                }
+                quiz += `<div class="answers">${answers}</div>`;
                 numOfMult = i+1;
             }
             $('#quiz').html(quiz);
@@ -169,7 +170,7 @@ function exit() {
                 if (selected.length > 0) {
                     userAnswer = selected[0].value;
                 }
-                if (userAnswer === question.correctAnswer) {
+                if (userAnswer === question.answer) {
                     numCorrect++;
                     container.style.color = 'lightgreen';
                 } else if (userAnswer === 'blank') {
@@ -199,11 +200,15 @@ function exit() {
             data['quiz'] = localStorage.getItem("quiz");
             $.ajax({
                 url: 'https://script.google.com/macros/s/AKfycbz7cE2k_h8VMNbfXTiREI5mc-P9xz6hKo59WVHYfk5y7df4GTP8/exec',
-                method: "POST",
-                dataType: "json",
-                data: data,
+                method: "POST", dataType: "json", data: data,
                 success: function (o) {
-                    $("#loadSubmission").hide();
+                    $.ajax({
+                        url: 'https://script.google.com/macros/s/AKfycbwqvNVeFbXM7mRUniqGfoO-KDfCNn0dpWZH1COiiLh5SPvs9Ig/exec',
+                        method: "POST", dataType: "json", data: data,
+                        success: function(o) {
+                            $("#loadSubmission").hide();
+                        }
+                    })
                 }
             });
         }
@@ -219,7 +224,8 @@ function exit() {
         $.ajax({
             url: url,
             method: "GET",
-            dataType: "json"
+            dataType: "json",
+            data: { "quiz": localStorage.getItem('quiz') }
         })
         .done(function(data) {
             callback(data.questions);

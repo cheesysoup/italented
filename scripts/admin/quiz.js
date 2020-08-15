@@ -1,9 +1,11 @@
 function quizDetails(quiz) {
     $('#admin-portal').hide();
     let details = `
-        <button class="btn" onclick="exitQuizDetails();">Exit</button>
-        <div>${quiz}</div>
-        <button class="btn" onclick="addModal('assign-quiz', assignQuizOptions);">Assign To</button>`;
+        <span id="exit" onclick="exitQuizDetails();">&leftarrow;</span>
+        <div class="header">${quiz}<button class="btn" onclick="addModal('assign-quiz', assignQuizOptions);">Assign To</button></div>
+        <table>
+            <tr><th>Name</th><th>Score</th></tr>
+    `;
     let data = {};
     data['quizDetails'] = quiz;
     data['user'] = localStorage.getItem("user");
@@ -11,8 +13,9 @@ function quizDetails(quiz) {
     getQuizData(data, o => {
         if (o.correct) {
             for (const row of o.details.slice(1)) {
-                details += `<div>${row[0]}</div>`
+                details += `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`;
             }
+            details += `</table>`;
             $('#quiz-details').html(details);
             $('#quiz-details').show();
             localStorage.setItem('quiz', quiz);

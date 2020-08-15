@@ -1,8 +1,11 @@
 function studentDetails(student) {
     $('#admin-portal').hide();
     let details = `
-        <button class="btn" onclick="exitStudentDetails();">Exit</button>
-        <div>${student}</div>`;
+        <span id="exit" onclick="exitStudentDetails();">&leftarrow;</span>
+        <div class="header">${student}</div>
+        <table>
+            <tr><th>Quiz</th><th>Score</th></tr>
+    `;
     let data = {};
     data['studentDetails'] = student;
     data['user'] = localStorage.getItem("user");
@@ -10,8 +13,9 @@ function studentDetails(student) {
     getUserData(data, o => {
         if (o.correct) {
             for (const row of o.details.slice(1)) {
-                details += `<div>${row[0]}</div>`
+                details += `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`;
             }
+            details += `</table>`;
             $('#student-details').html(details);
             $('#student-details').show();
             localStorage.setItem('student', student);

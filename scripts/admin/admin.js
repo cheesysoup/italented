@@ -6,6 +6,29 @@ const postUserData = (data, callback) => { $.ajax({ url: userUrl, method: "POST"
 const getQuizData = (data, callback) => { $.ajax({ url: quizUrl, method: "GET", dataType: "json", data: data, success: callback }); }
 const postQuizData = (data, callback) => { $.ajax({ url: quizUrl, method: "POST", dataType: "json", data: data, success: callback }); }
 
+(() => {
+    $('#new-student').hide();
+    $('#admin-login-container').hide();
+    $('#admin-portal').hide();
+
+    const user = localStorage.getItem("user");
+    const pswrd = localStorage.getItem("pass");
+    if (user && pswrd) {
+        let data = {};
+        data['user'] = user;
+        data['pswrd'] = pswrd;
+        getUserData(data, o => {
+            if (o.correct) {
+                adminPortal(user, pswrd);
+            } else {
+                $('#admin-login-container').show();
+            }
+        });
+    } else {
+        $('#admin-login-container').show();
+    }
+})();
+
 function adminLogin(form){
     const user = form.user.value;
     const pswrd = form.pass.value;
@@ -44,8 +67,6 @@ function adminPortal(user, pass) {
                 students += `<div onclick="studentDetails('${student[0]} ${student[1]}');">${student[0]} ${student[1]}</div>`;
             }
             $('#student-list').html(students);
-        } else {
-            reset();
         }
     });
     getQuizData(data, o => {
@@ -55,8 +76,6 @@ function adminPortal(user, pass) {
                 quizzes += `<div onclick="quizDetails('${quiz[0]}');">${quiz[0]}</div>`
             }
             $('#quiz-list').html(quizzes);
-        } else {
-            reset();
         }
     });
 }
@@ -97,29 +116,6 @@ function addQuiz() {
     data['Time Limit'] = last;
     postQuizData(data, o => $('#new-quiz').hide());
 }
-
-(() => {
-    $('#new-student').hide();
-    $('#admin-login-container').hide();
-    $('#admin-portal').hide();
-
-    const user = localStorage.getItem("user");
-    const pswrd = localStorage.getItem("pass");
-    if (user && pswrd) {
-        let data = {};
-        data['user'] = user;
-        data['pswrd'] = pswrd;
-        getUserData(data, o => {
-            if (o.correct) {
-                adminPortal(user, pswrd);
-            } else {
-                $('#admin-login-container').show();
-            }
-        });
-    } else {
-        $('#admin-login-container').show();
-    }
-})();
 
 function reset() {
     $('#admin-portal').hide();

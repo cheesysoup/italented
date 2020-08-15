@@ -1,6 +1,22 @@
 @font-face {
   font-family: Montserrat;
+  font-weight: 400;
   src: url(../fonts/Montserrat/Montserrat-Regular.ttf);
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 500;
+  src: url(../fonts/Montserrat/Montserrat-Medium.ttf);
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 600;
+  src: url(../fonts/Montserrat/Montserrat-SemiBold.ttf);
+}
+@font-face {
+  font-family: Montserrat;
+  font-weight: 700;
+  src: url(../fonts/Montserrat/Montserrat-Bold.ttf);
 }
 input:focus,
 select:focus,
@@ -105,7 +121,7 @@ button:focus {
 #login-container {
   margin: auto;
   margin-top: calc(50vh - 200px);
-  width: 310px;
+  width: 285px;
   height: 400px;
 }
 #login-container .label {
@@ -171,7 +187,7 @@ button:focus {
 #admin-login-container {
   margin: auto;
   margin-top: calc(50vh - 200px);
-  width: 285px;
+  width: 310px;
   height: 400px;
 }
 #admin-login-container .label {
@@ -190,8 +206,77 @@ button:focus {
   height: 36px;
 }
 
-#quiz-list div:hover, #student-list div:hover {
+#admin-portal {
+  margin-left: 20vw;
+  font-family: Montserrat, Arial;
+}
+#admin-portal #portal-heading {
+  margin-top: 64px;
+  margin-bottom: 72px;
+  font-size: 32px;
+  font-weight: 600;
+}
+#admin-portal td {
+  padding-left: 0px;
+  padding-right: 200px;
+  vertical-align: top;
+}
+#admin-portal #student-heading, #admin-portal #quiz-heading {
+  width: 250px;
+  font-size: 24px;
+  font-weight: 500;
+}
+#admin-portal #student-heading span, #admin-portal #quiz-heading span {
+  float: right;
+}
+#admin-portal #student-heading span:hover, #admin-portal #quiz-heading span:hover {
   cursor: pointer;
+}
+#admin-portal #student-list, #admin-portal #quiz-list {
+  margin-top: 24px;
+  margin-bottom: 72px;
+}
+#admin-portal #student-list div, #admin-portal #quiz-list div {
+  margin-bottom: 12px;
+}
+#admin-portal #student-list div:hover, #admin-portal #quiz-list div:hover {
+  cursor: pointer;
+}
+
+#student-details, #quiz-details {
+  margin-left: 20vw;
+  font-family: Montserrat, Arial;
+}
+#student-details #exit, #quiz-details #exit {
+  position: fixed;
+  top: 75px;
+  left: 10vw;
+  font-size: 36px;
+}
+#student-details #exit:hover, #quiz-details #exit:hover {
+  cursor: pointer;
+}
+#student-details .header, #quiz-details .header {
+  width: 500px;
+  margin-top: 90px;
+  font-size: 24px;
+  font-weight: 600;
+}
+#student-details .header .btn, #quiz-details .header .btn {
+  float: right;
+}
+#student-details table, #quiz-details table {
+  margin-top: 24px;
+  padding-right: 12px;
+}
+#student-details table th, #quiz-details table th {
+  text-align: left;
+  font-weight: 600;
+}
+#student-details table td, #quiz-details table td {
+  padding-top: 12px;
+  padding-right: 24px;
+  font-size: 16px;
 }
 
 .modal {
@@ -205,6 +290,7 @@ button:focus {
   overflow: auto;
   background-color: black;
   background-color: rgba(0, 0, 0, 0.4);
+  font-family: Montserrat, Arial;
 }
 
 .modal-content {
@@ -213,6 +299,12 @@ button:focus {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+}
+.modal-content > * {
+  margin-bottom: 12px;
+}
+.modal-content .short-answer {
+  margin-bottom: 18px;
 }
 
 .close {
