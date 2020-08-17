@@ -4,6 +4,11 @@ function exit() {
 }
 
 (function() {
+    // checks that user has logged in
+    if (!localStorage.getItem("username")) {
+        localStorage.setItem("quiz", "");
+        location.href = `../index.html`;
+    }
 
     // set score factors
     const correctPoints = 6;
@@ -44,7 +49,6 @@ function exit() {
         }
     ];
 
-
     function setup(questions) {
         function buildQuiz() {
             //Building timer/counter
@@ -80,12 +84,14 @@ function exit() {
                         <span class="mc"></span>
                         Leave blank
                     </label>`;
-                quiz +=
-                    `<div class="question" id="question${i+1}"> ${i + 1}. ${question.question} </div>
-                    <div id="image${i+1}"><img id="x" src="../images/${i + 1}.jpg">  </div>
-                    <div class="answers${i+1}" id="answers${i+1}"> ${answers} </div>`;
+                quiz += `<div class="question" id="question${i+1}"> ${i + 1}. ${question.question} </div>`;
+                if (question.image) {
+                    quiz += `<div id="image${i+1}><img id="x" src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
+                }
+                quiz += `<div class="answers" id="answers${i+1}">${answers}</div>`;
                 numOfMult = i+1;
             }
+            console.log(quiz)
             $('#quiz').html(quiz);
             for (let q = pageSize+1; q <= questions.length; q++){
                 $(`#question${q}`).hide();
@@ -163,24 +169,24 @@ function exit() {
                 }
             }
 
-            let results = [numCorrect,numBlank,numWrong];
+            let results = [numCorrect, numBlank, numWrong];
             return results;
         }
 
         // show results
         function showResults() {
-            var formData = new FormData();
+            var data = {};
             let answerContainers = $('#quiz').find('.answers');
             let numCorrect = 0;
             let numBlank = 0;
 
             //Time taken for the test
             finished = true;
-            formData.append(`Time`, new Date((totalTime - time) * 1000).toISOString().substr(11,8));
+            data[`Time`] = new Date((totalTime - time) * 1000).toISOString().substr(11,8);
 
             for (let i = 0; i < questions.length; i++) {
                 const question = questions[i];
-                let quest =  $('#quiz').find(`.answers${i+1}`);
+                let quest =  $('#quiz').find(`#answers${i+1}`);
                 quest[0].style.color = 'red';
                 let container = quest[0];
                 let userAnswer = null;
@@ -188,7 +194,6 @@ function exit() {
                 if (selected.length > 0) {
                     userAnswer = selected[0].value;
                 }
-                console.log(question.answer);
                 if (userAnswer === question.answer) {
                     numCorrect++;
                     container.style.color = 'lightgreen';
@@ -199,7 +204,7 @@ function exit() {
                     container.style.color = 'red';
                 }
 
-                formData.append(`Question ${i+1}`,userAnswer);
+                data[`Question ${i+1}`] = userAnswer;
             }
 
             getShortAnswerResults();
@@ -213,17 +218,23 @@ function exit() {
             $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
             
             $("#loadSubmission").show();
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbz03OJQN7BVIagsDUFGjRyOR3BF6eUYSOU0ModJygKGVRC_FwNL/exec'
-            const form = document.forms['submit-to-google-sheet']
-            formData.append(`Score`,score);
-            fetch(scriptURL, { method: 'POST', body: formData})
-            .then(response => finish(response))
-            .catch(error => console.error('Error!', error.message))
-        }
-
-        function finish(response){
-            console.log('Success!', response);
-            $("#loadSubmission").hide();
+            data['Score'] = score;
+            data['user'] = localStorage.getItem("username");
+            data['pswrd'] = localStorage.getItem("password");
+            data['quiz'] = localStorage.getItem("quiz");
+            $.ajax({
+                url: 'https://script.google.com/macros/s/AKfycbz7cE2k_h8VMNbfXTiREI5mc-P9xz6hKo59WVHYfk5y7df4GTP8/exec',
+                method: "POST", dataType: "json", data: data,
+                success: function (o) {
+                    $.ajax({
+                        url: 'https://script.google.com/macros/s/AKfycbwqvNVeFbXM7mRUniqGfoO-KDfCNn0dpWZH1COiiLh5SPvs9Ig/exec',
+                        method: "POST", dataType: "json", data: data,
+                        success: function(o) {
+                            $("#loadSubmission").hide();
+                        }
+                    })
+                }
+            });
         }
 
         // populate components
@@ -269,7 +280,8 @@ function exit() {
         $.ajax({
             url: url,
             method: "GET",
-            dataType: "json"
+            dataType: "json",
+            data: { "quiz": localStorage.getItem('quiz') }
         })
         .done(function(data) {
             callback(data.questions);

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Admin Portal</title>
+
+        <link rel="stylesheet" href="styles/styles.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div id="admin-login-container">
+            <form name="admin-login">
+                <div class="label">Username</div>
+                <input type="text" name="user" class="short-answer"><br>
+                <div class="label">Password</div>
+                <input type="password" name="pass" class="short-answer"><br>
+                <div id="admin-login-btn">
+                    <input type="button" onclick="adminLogin(this.form);" value="Login" class="btn"/>
+                </div>
+            </form>
+        </div>
+
+        <div id="admin-portal">
+            <div id="portal-heading">Admin Portal</div>
+            <table>
+                <tr>
+                    <td>
+                        <div id="student-heading">
+                            Students
+                            <span onclick="addModal('new-student');">&plus;</span>
+                        </div>
+                        <div id="student-list"></div>
+                    </td>
+                    <td>
+                        <div id="quiz-heading">
+                            Quizzes
+                            <span onclick="addModal('new-quiz');">&plus;</span>
+                        </div>
+                        <div id="quiz-list"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="student-details"></div>
+
+        <div id="quiz-details"></div>
+
+        <div id="new-student" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div>First Name</div>
+                <input type="text" id="first" class="short-answer"><br>
+                <div>Last Name</div>
+                <input type="text" id="last" class="short-answer"><br>
+                <input type="button" onclick="addStudent();" value="OK" class="btn"/>
+            </div>
+        </div>
+
+        <div id="new-quiz" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div>Quiz Name</div>
+                <input type="text" id="quiz-name" class="short-answer"><br>
+                <div>Time Limit</div>
+                <input type="text" id="time-limit" class="short-answer"><br>
+                <input type="button" onclick="addQuiz();" value="OK" class="btn"/>
+            </div>
+        </div>
+
+        <div id="assign-quiz" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="assign-quiz-students"></div>
+                <input type="button" onclick="assignQuiz();" value="OK" class="btn"/>
+            </div>
+        </div>
+
+        <script src="scripts/admin/student.js"></script>
+        <script src="scripts/admin/quiz.js"></script>
+        <script src="scripts/admin/admin.js"></script>
+    </body>
+</html>
