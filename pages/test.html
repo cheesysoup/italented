@@ -12,10 +12,37 @@
     </head>
 
     <body>
+        <div id="bgBox">
+            <div id="popupBox">
+                <h1 id="quizNamePopup">Quiz 1:</h1>
+                <p id="quizScoreText">Quiz Results</p>
+                <div id="scoreBox">
+                    <h1 id="yourScoreText">Your score is</h1>
+                    <p id="scoreBreakdown"></p>
+                    <p id="fractionScore"></p>
+                    <p id="bigScore"></p>
+                    <p id="congratsP">Congratulations! You can now review your quiz to see which questions you got wrong, and what the correct answer choices were.</p>
+                    <button id="popupX">
+                        <div id="xRect1">
+                            <div id="xRect2"></div>
+                        </div>
+                    </button>
+                    <canvas id="myCanvas"></canvas>
+                </div>
+                <button id="reviewQuiz">Review Quiz</button>
+            </div>
+        </div>
+        <button id="viewQuizResults">View Quiz Results</button>
+        <h1 id="quizName">Quiz 1</h1>
         <div id="quiz"></div>
         <div id="shortAnswersQuiz"></div>
+
         <button id="submit">Submit Quiz</button>
+       
+       
         <div id="results"></div>
+
+        <!-- <div class="big rect"></div> -->
             
         <script src="../scripts/test.js"></script>
     </body>
