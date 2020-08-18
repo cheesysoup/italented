@@ -106,14 +106,16 @@ function addStudent() {
 }
 
 function addQuiz() {
-    let first = $('#new-quiz #quiz-name').val();
-    let last = $('#new-quiz #time-limit').val();
+    let quizName = $('#new-quiz #quiz-name').val();
+    let timeLimit = $('#new-quiz #time-limit').val();
+    let questionCount = $('#new-quiz #question-count').val();
     let data = {};
     data['user'] = localStorage.getItem("user");
     data['pswrd'] = localStorage.getItem("pass");
     data['newQuiz'] = true;
-    data['Quiz'] = first;
-    data['Time Limit'] = last;
+    data['Quiz'] = quizName;
+    data['Time Limit'] = timeLimit;
+    data['Question Count'] = questionCount;
     postQuizData(data, o => $('#new-quiz').hide());
 }
 
