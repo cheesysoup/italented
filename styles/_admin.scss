@@ -71,7 +71,7 @@ $left-offset: 20vw;
     }
 }
 
-#student-details, #quiz-details {
+#student-details, #student-quiz-details, #quiz-details {
     margin-left: $left-offset;
     font-family: $font;
 
@@ -105,12 +105,36 @@ $left-offset: 20vw;
             text-align: left;
             font-weight: 600;
         }
+
+        tr {
+            &:hover {
+                cursor: pointer;
+            }
+        }
     
         td {
             padding-top: 12px;
             padding-right: 24px;
             font-size: 16px;
         }
+    }
+}
+
+#student-quiz-details {
+    font-size: 20px;
+
+    #name {
+        margin-top: 40px;
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    #details {
+        margin-top: 24px;
+    }
+
+    #student-answers {
+        margin-top: 40px;
     }
 }
 

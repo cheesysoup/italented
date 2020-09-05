@@ -178,14 +178,6 @@ button:focus {
   margin-left: 50px;
 }
 
-#next {
-  margin-bottom: 20px;
-}
-
-#previous {
-  margin-bottom: 20px;
-}
-
 #results {
   margin-left: 50px;
   margin-bottom: 20px;
@@ -251,40 +243,58 @@ button:focus {
   cursor: pointer;
 }
 
-#student-details, #quiz-details {
+#student-details, #student-quiz-details, #quiz-details {
   margin-left: 20vw;
   font-family: Montserrat, Arial;
 }
-#student-details #exit, #quiz-details #exit {
+#student-details #exit, #student-quiz-details #exit, #quiz-details #exit {
   position: fixed;
   top: 75px;
   left: 10vw;
   font-size: 36px;
 }
-#student-details #exit:hover, #quiz-details #exit:hover {
+#student-details #exit:hover, #student-quiz-details #exit:hover, #quiz-details #exit:hover {
   cursor: pointer;
 }
-#student-details .header, #quiz-details .header {
+#student-details .header, #student-quiz-details .header, #quiz-details .header {
   width: 500px;
   margin-top: 90px;
   font-size: 24px;
   font-weight: 600;
 }
-#student-details .header .btn, #quiz-details .header .btn {
+#student-details .header .btn, #student-quiz-details .header .btn, #quiz-details .header .btn {
   float: right;
 }
-#student-details table, #quiz-details table {
+#student-details table, #student-quiz-details table, #quiz-details table {
   margin-top: 24px;
   padding-right: 12px;
 }
-#student-details table th, #quiz-details table th {
+#student-details table th, #student-quiz-details table th, #quiz-details table th {
   text-align: left;
   font-weight: 600;
 }
-#student-details table td, #quiz-details table td {
+#student-details table tr:hover, #student-quiz-details table tr:hover, #quiz-details table tr:hover {
+  cursor: pointer;
+}
+#student-details table td, #student-quiz-details table td, #quiz-details table td {
   padding-top: 12px;
   padding-right: 24px;
   font-size: 16px;
+}
+
+#student-quiz-details {
+  font-size: 20px;
+}
+#student-quiz-details #name {
+  margin-top: 40px;
+  font-size: 32px;
+  font-weight: 600;
+}
+#student-quiz-details #details {
+  margin-top: 24px;
+}
+#student-quiz-details #student-answers {
+  margin-top: 40px;
 }
 
 .modal {
@@ -326,3 +336,5 @@ button:focus {
   text-decoration: none;
   cursor: pointer;
 }
+
+/*# sourceMappingURL=styles.css.map */

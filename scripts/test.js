@@ -53,14 +53,17 @@ function exit() {
         function buildQuiz() {
             //Building timer/counter
             var count = setInterval(function(){
-                if (finished == false && time == 0){
+                if (finished) {
+                    clearInterval(count);
+                }
+                if (time == 0) {
                     finished = true;
                     showResults();
                     location.href = `dashboard.html`;
                     alert("Test Finished: Answers have been submitted");
+                } else {
+                    time--;
                 }
-                if (finished == false)
-                --time;
                 document.getElementById("timer").innerHTML = "Time Left: " + new Date(time * 1000).toISOString().substr(11,8);
             }, 1000)
 
@@ -120,7 +123,7 @@ function exit() {
 
         // build all short answer questions
         function buildAllShortAnswers(numOfMult) {
-            let allShortAnswers='';
+            let allShortAnswers = '';
             for (let i=0; i < shortAnswerQuestions.length; i++) {
                 allShortAnswers += buildShortAnswersOneByOne(i,numOfMult);
 
@@ -152,7 +155,7 @@ function exit() {
                 let alreadyWrong = false;
                 for (let j = 0; j < shortAnswerQuestions[i].correctAnswer.length; j++) {
                     if (answer === shortAnswerQuestions[i].correctAnswer[j]) {
-                        numCorrect ++;
+                        numCorrect++;
                         document.getElementsByName(`shortAnswers${i}`)[0].style.border = '2px solid lightgreen';
                         break;
                     } else if (answer === '') {
@@ -179,6 +182,7 @@ function exit() {
             let answerContainers = $('#quiz').find('.answers');
             let numCorrect = 0;
             let numBlank = 0;
+            let numWrong = 0;
 
             //Time taken for the test
             finished = true;
@@ -201,6 +205,7 @@ function exit() {
                     numBlank++;
                     container.style.color = 'yellow';
                 } else {
+                    numWrong++;
                     container.style.color = 'red';
                 }
 
@@ -210,10 +215,10 @@ function exit() {
             getShortAnswerResults();
 
             let shortAnswerResults = getShortAnswerResults();
-            let numWrong = questions.length - numCorrect - numBlank + shortAnswerResults[2];
             numCorrect += shortAnswerResults[0];
             numBlank += shortAnswerResults[1];
-            let totalPoints = (questions.length+shortAnswerQuestions.length) * correctPoints;
+            numWrong += shortAnswerResults[2];
+            let totalPoints = (questions.length + shortAnswerQuestions.length) * correctPoints;
             let score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
             $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
             
@@ -276,12 +281,11 @@ function exit() {
     }
 
     function getQuestions(callback) {
-        const url = 'https://script.google.com/macros/s/AKfycbwoTxPRGLrIFBhwZCHVl4sqE9mVwDdB6znxXbmDztzD6-bmU8Ct/exec';
         $.ajax({
-            url: url,
+            url: 'https://script.google.com/macros/s/AKfycbwoTxPRGLrIFBhwZCHVl4sqE9mVwDdB6znxXbmDztzD6-bmU8Ct/exec',
             method: "GET",
             dataType: "json",
-            data: { "quiz": localStorage.getItem('quiz') }
+            data: { "quiz": localStorage.getItem("quiz") }
         })
         .done(function(data) {
             callback(data.questions);
