@@ -28,10 +28,15 @@ function loadQuiz(q) {
         data: data,
         success: function (o) {
             let details = o.details;
+            console.log(details);
             let dashboard = '';
             for (let i = 1; i < details.length; i++) {
                 if (details[i] != '') {
-                    dashboard += `<button id="quiz${i + 1}" class="btn" onclick="loadQuiz('${details[i][0]}');">${details[i][0]}</button>`;
+                    if (details[i][1] !== "") {
+                        dashboard += `<button id="quiz${i}" class="btn" onclick="loadQuiz('${details[i][0]}');" disabled>${details[i][0]}</button>`;
+                    } else {
+                        dashboard += `<button id="quiz${i}" class="btn" onclick="loadQuiz('${details[i][0]}');">${details[i][0]}</button>`;
+                    }
                 }
             }
             $('#quizButtons').html(dashboard);
