@@ -23,6 +23,13 @@ function exit() {
     
     let quiz = localStorage.getItem("quiz");
 
+    //Multiple choice questions per page
+    let pageSize = 5;
+
+    let currentPage = 0;
+    let totalPages = 0;
+    let totalQuestions = 0;
+
     // short answer questions array
     const shortAnswerQuestions = [
         {
@@ -59,6 +66,7 @@ function exit() {
 
             let quiz = ``;
             let numOfMult = 0;
+
             for (let i = 0; i < questions.length; i++) {
                 const question = questions[i];
                 let answers = ``;
@@ -76,15 +84,20 @@ function exit() {
                         <span class="mc"></span>
                         Leave blank
                     </label>`;
-                quiz += `<div class="question"> ${i + 1}. ${question.question} </div>`;
+                quiz += `<div class="question" id="question${i+1}"> ${i + 1}. ${question.question} </div>`;
                 if (question.image) {
-                    quiz += `<div><img id="x" src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
+                    quiz += `<div id="image${i+1}><img id="x" src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
                 }
-                quiz += `<div class="answers">${answers}</div>`;
+                quiz += `<div class="answers" id="answers${i+1}">${answers}</div>`;
                 numOfMult = i+1;
             }
+            console.log(quiz)
             $('#quiz').html(quiz);
-
+            for (let q = pageSize+1; q <= questions.length; q++){
+                $(`#question${q}`).hide();
+                $(`#image${q}`).hide();
+                $(`#answers${q}`).hide();
+            }
             buildAllShortAnswers(numOfMult);
         }
 
@@ -99,8 +112,8 @@ function exit() {
                 </label>`;
 
             shortAnswersQuiz += 
-                `<div class="shortAnswerQuestions name="answerBox${questionNumber}"> ${questionNumber+numOfMult+1}. ${shortAnswerQuestions[questionNumber].question} </div>
-                <div class="shortAnswersInput"> ${shortAnswersInput} </div>`
+                `<div class="shortAnswerQuestions name="answerBox${questionNumber}" id="question${questionNumber+numOfMult+1}"> ${questionNumber+numOfMult+1}. ${shortAnswerQuestions[questionNumber].question} </div>
+                <div class="shortAnswersInput" id="answers${questionNumber+numOfMult+1}"> ${shortAnswersInput} </div>`
 
             return shortAnswersQuiz;
         }
@@ -110,8 +123,17 @@ function exit() {
             let allShortAnswers='';
             for (let i=0; i < shortAnswerQuestions.length; i++) {
                 allShortAnswers += buildShortAnswersOneByOne(i,numOfMult);
+
             }
             $('#shortAnswersQuiz').html(allShortAnswers);
+            
+            totalQuestions = numOfMult + shortAnswerQuestions.length;
+            totalPages = Math.trunc(totalQuestions/5);
+            for (let q = pageSize+1; q <= numOfMult + shortAnswerQuestions.length; q++){
+                $(`#question${q}`).hide();
+                $(`#image${q}`).hide();
+                $(`#answers${q}`).hide();
+            }
         }
 
         // get short answer results
@@ -164,7 +186,9 @@ function exit() {
 
             for (let i = 0; i < questions.length; i++) {
                 const question = questions[i];
-                let container = answerContainers[i];
+                let quest =  $('#quiz').find(`#answers${i+1}`);
+                quest[0].style.color = 'red';
+                let container = quest[0];
                 let userAnswer = null;
                 const selected = $(container).find(`input[name=question${i}]:checked`);
                 if (selected.length > 0) {
@@ -217,6 +241,38 @@ function exit() {
         buildQuiz();
         $('#submit').click(showResults);
         MathJax.typeset()
+        $('#next').click(nextPage);
+        $('#previous').click(previousPage);
+    }
+    function nextPage(){
+        if (currentPage < totalPages){
+            for (let q = 1; q < pageSize+1; q++){
+                $(`#question${currentPage*5+q}`).hide();
+                $(`#image${currentPage*5+q}`).hide();
+                $(`#answers${currentPage*5+q}`).hide();
+            }
+            currentPage++;
+            for (let q = 1; q < pageSize+1; q++){
+                $(`#question${currentPage*5+q}`).show();
+                $(`#image${currentPage*5+q}`).show();
+                $(`#answers${currentPage*5+q}`).show();
+            }
+        }
+    }
+    function previousPage(){
+        if (currentPage > 0){
+            for (let q = 1; q < pageSize+1; q++){
+                $(`#question${currentPage*5+q}`).hide();
+                $(`#image${currentPage*5+q}`).hide();
+                $(`#answers${currentPage*5+q}`).hide();
+            }
+            currentPage--;
+            for (let q = 1; q < pageSize+1; q++){
+                $(`#question${currentPage*5+q}`).show();
+                $(`#image${currentPage*5+q}`).show();
+                $(`#answers${currentPage*5+q}`).show();
+            }
+        }
     }
 
     function getQuestions(callback) {
