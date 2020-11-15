@@ -40,6 +40,13 @@
                         </div>
                         <div id="quiz-list"></div>
                     </td>
+                    <td>
+                        <div id="class-heading">
+                            Quizzes
+                            <span onclick="addModal('new-class');">&plus;</span>
+                        </div>
+                        <div id="quiz-list"></div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -60,6 +67,17 @@
         </div>
 
         <div id="new-quiz" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div>Quiz Name</div>
+                <input type="text" id="quiz-name" class="short-answer"><br>
+                <div>Time Limit</div>
+                <input type="text" id="time-limit" class="short-answer"><br>
+                <input type="button" onclick="addQuiz();" value="OK" class="btn"/>
+            </div>
+        </div>
+
+        <div id="new-class" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div>Quiz Name</div>
