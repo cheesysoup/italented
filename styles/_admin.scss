@@ -121,6 +121,7 @@ $left-offset: 20vw;
 }
 
 #student-quiz-details {
+    margin-right: $left-offset;
     font-size: 20px;
 
     #name {
@@ -133,8 +134,13 @@ $left-offset: 20vw;
         margin-top: 24px;
     }
 
-    #student-answers {
+    #quiz-results {
         margin-top: 40px;
+
+        .answer-choice {
+            margin-bottom: 12px;
+            margin-left: 25px;
+        }
     }
 }
 

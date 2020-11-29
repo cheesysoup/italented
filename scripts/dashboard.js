@@ -28,7 +28,6 @@ function loadQuiz(q) {
         data: data,
         success: function (o) {
             let details = o.details;
-            console.log(details);
             let dashboard = '';
             for (let i = 1; i < details.length; i++) {
                 if (details[i] != '') {

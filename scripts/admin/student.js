@@ -40,31 +40,53 @@ function studentQuizDetails(student, quiz) {
         data: { "quiz": quiz[0] }
     })
     .done(function(o) {
+        const questions = o.questions;
         const correctPoints = 6;
         const blankPoints = 1.5;
         const wrongPoints = 0;
         let numCorrect = 0;
         let numBlank = 0;
         let numWrong = 0;
-        let answers = `
-            <div id="student-answers">
+        let results = `
+            <div id="quiz-results">
         `;
-        for (let i = 0; i < o.questions.length; i++) {
-            if (quiz[i+3] === o.questions[i].answer) {
-                numCorrect++;
-            } else if (quiz[i+3] === 'blank') {
+        for (let i = 0; i < questions.length; i++) {
+            const question = questions[i];
+            let answers = ``;
+            for (answer in question.answers) {
+                if (quiz[i+3] === answer) {
+                    if (answer === question.answer) {
+                        answers += `<div class="answer-choice" style="background-color: rgba(121, 203, 69, 0.5)">${answer}: ${question.answers[answer]}</div>`;
+                        numCorrect++;
+                    } else {
+                        answers += `<div class="answer-choice" style="background-color: rgba(217, 60, 33, 0.5)">${answer}: ${question.answers[answer]}</div>`;
+                        numWrong++;
+                    }
+                } else if (answer === question.answer) {
+                    answers += `<div class="answer-choice" style="border: 2px solid rgba(121, 203, 69, 0.5)">${answer}: ${question.answers[answer]}</div>`;
+                } else {
+                    answers += `<div class="answer-choice">${answer}: ${question.answers[answer]}</div>`;
+                }
+            }
+            if (quiz[i+3] === "blank") {
+                answers += `<div class="answer-choice" style="background-color: rgba(255, 210, 49, 0.5)">Leave blank</div>`;
                 numBlank++;
             } else {
-                numWrong++;
+                answers += `<div class="answer-choice">Leave blank</div>`;
             }
-            answers += `<div>${i+1}. ${quiz[i+3]}</div>`;
+            results += `<div class="question" id="question${i+1}"> ${i + 1}. ${question.question} </div>`;
+            if (question.image) {
+                answers += `<div id="image${i+1}><img id="x" src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
+            }
+            results += `<div class="answers" id="answers${i+1}">${answers}</div>`;
         }
-        answers += `</div>`;
-        let totalPoints = o.questions.length * correctPoints;
+        results += `</div>`;
+        let totalPoints = questions.length * correctPoints;
         let score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
         details += `<div id="details">${score}/${totalPoints} points<br>${numCorrect} correct, ${numWrong} wrong, ${numBlank} blank</div>`;
-        details += answers;
+        details += results;
         $('#student-quiz-details').html(details);
+        MathJax.typeset();
         $('#student-quiz-details').show();
     });
 }

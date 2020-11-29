@@ -283,6 +283,7 @@ button:focus {
 }
 
 #student-quiz-details {
+  margin-right: 20vw;
   font-size: 20px;
 }
 #student-quiz-details #name {
@@ -293,8 +294,12 @@ button:focus {
 #student-quiz-details #details {
   margin-top: 24px;
 }
-#student-quiz-details #student-answers {
+#student-quiz-details #quiz-results {
   margin-top: 40px;
+}
+#student-quiz-details #quiz-results .answer-choice {
+  margin-bottom: 12px;
+  margin-left: 25px;
 }
 
 .modal {
