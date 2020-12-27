@@ -211,36 +211,36 @@ body {
   }
 }
 /** Footer **/
-.footer {
+#footer {
   position: relative;
   background-color: #88B8D6;
   height: 350px;
 }
-.footer .footer-content {
+#footer .footer-content {
   height: 350px;
   display: flex;
 }
-.footer .footer-content .footer-section {
+#footer .footer-content .footer-section {
   flex: 1;
   padding: 10px;
   margin-top: 50px;
 }
-.footer .footer-content .footer-section .footer-pages {
+#footer .footer-content .footer-section .footer-pages {
   display: flex;
 }
-.footer .footer-content .footer-section .footer-pages .footer-section-pages {
+#footer .footer-content .footer-section .footer-pages .footer-section-pages {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-.footer .footer-content .footer-section .footer-page-link {
+#footer .footer-content .footer-section .footer-page-link {
   color: white;
   font-weight: 500;
   font-family: Montserrat, Arial;
   font-style: normal;
   font-size: 18px;
 }
-.footer .footer-bottom {
+#footer .footer-bottom {
   height: 50px;
   color: #FFFFFF;
   padding-top: 10px;
@@ -459,12 +459,9 @@ body {
   font-family: Montserrat, Arial;
 }
 
-#mission {
-  position: relative;
-}
 #mission h1 {
   position: absolute;
-  top: 25%;
+  top: 17%;
   width: 100%;
   text-align: center;
   font-size: 60px;
@@ -478,7 +475,7 @@ div h2 {
 }
 
 #instructors {
-  margin-bottom: 32px;
+  padding: 50px 25px;
   text-align: center;
 }
 #instructors ul {
@@ -503,6 +500,7 @@ div h2 {
 #testimonials {
   overflow: auto;
   background-color: #ECECEC;
+  padding: 50px 25px;
 }
 #testimonials ul {
   width: 90%;
@@ -511,9 +509,7 @@ div h2 {
   list-style-type: none;
 }
 #testimonials p {
-  font-size: 40px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 400;
   color: #646464;
 }
-
-/*# sourceMappingURL=styles.css.map */

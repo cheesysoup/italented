@@ -5,11 +5,9 @@ body {
 }
 
 #mission {
-    position: relative;
-
     h1 {
         position: absolute;
-        top: 25%;
+        top: 17%;
         width: 100%;
         text-align: center;
         font-size: 60px;
@@ -26,7 +24,7 @@ div {
 }
 
 #instructors {
-    margin-bottom: 32px;
+    padding: 50px 25px;
     text-align: center;
 
     ul {
@@ -55,6 +53,7 @@ div {
 #testimonials {
     overflow: auto;
     background-color: #ECECEC;
+    padding: 50px 25px;
 
     ul {
         width: 90%;
@@ -64,8 +63,8 @@ div {
     }
     
     p {
-        font-size: 40px;
-        font-weight: 600;
+        font-size: 24px;
+        font-weight: 400;
         color: #646464;
     }
 }

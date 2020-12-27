@@ -3,22 +3,16 @@
     <head>
         <meta charset="utf-8">
         <title>ITalented</title>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
         <!--NAV BAR-->
-        <div class="topnav" id="myTopnav">
-            <a href="index.html" class="active">ITalented</a>
-            <a href="pages/login.html" class="login">Login</a>
-            <a href="#contact">Contact</a>
-            <a href="#classes">Classes</a>
-            <a href="#about">About</a>
-            <a href="javascript:void(0);" class="icon" onclick="react()">
-                <i class="fa fa-bars"></i>
-            </a>
-        </div>
+        <div class="topnav" id="navbar"></div>
 
         <img src="images/home.jpg" class="img-fluid" style="width: 100%; height: auto; margin-top: 53px;">
 
@@ -58,42 +52,7 @@
         </div>
 
         <!--FOOTER-->
-        <div class="footer">
-            <div class="footer-content">
-                <div class="footer-section pages">
-                    <div style="color:white; font-size: 32px; font-family: Montserrat, Arial; font-weight:600; text-align:center; width:100%; margin-bottom: 20px;">Pages:</div>
-                    <div class="footer-pages">
-                        <div class="footer-section-pages side1" style="align-items: flex-end;">
-                            <div style="max-width: 120px; padding-right: 40px;">
-                                <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">Home</p>
-                                <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">About</p>
-                                <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">Classes</p>
-                            </div>
-                        </div>
-                        <div class="footer-section-pages side2">
-                            <div style="padding-left: 40px;">
-                                <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">Contact</p>
-                                <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">Login</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-section contacts">
-                    <div class="contact-container">
-                        <div style="color:white; font-size: 32px; font-family: Montserrat, Arial; font-weight: 600; text-align:center; width:100%; margin-bottom: 20px;">Contact Us At:</div>
-                        <div class="footer-contacts">
-                            <div>
-                                <p class="footer-page-link" style="text-align: center;">Email: info@italented.org</p>
-                                <p class="footer-page-link" style="text-align: center;">Phone: (408) 899-9395</p>
-                            </div>                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                Institute for Talented LLC. All rights reserved.
-            </div>
-        </div>
+        <div id="footer"></div>
 
         <script src="scripts/index.js"></script>
     </body>
