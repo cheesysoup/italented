@@ -462,9 +462,10 @@ body {
 #mission h1 {
   position: absolute;
   top: 17%;
-  width: 100%;
+  width: 82%;
+  margin-left: 150px;
   text-align: center;
-  font-size: 60px;
+  font-size: 30px;
   color: #FFFFFF;
 }
 
