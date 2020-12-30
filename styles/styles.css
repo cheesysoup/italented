@@ -68,9 +68,9 @@ button:focus {
 }
 
 .question {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-family: Montserrat, Arial;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #000000;
@@ -146,7 +146,7 @@ button:focus {
   height: 28px;
 }
 #login-container #exit {
-  margin: auto;
+  margin-left: 127.5px;
   margin-top: 120px;
   width: 30px;
   height: 30px;
@@ -155,9 +155,79 @@ button:focus {
   cursor: pointer;
 }
 
-#quiz {
+#login-btn {
+  margin-top: 40vh;
+  margin-left: 47vw;
+}
+
+#dashboard {
+  font-family: Montserrat, Arial;
+}
+#dashboard #header {
+  margin-top: 75px;
+}
+#dashboard #header #welcome {
+  font-weight: 600;
+  font-size: 32px;
+  color: #000000;
+}
+#dashboard .table-title {
   margin-top: 50px;
-  margin-left: 50px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 24px;
+  color: #000000;
+}
+#dashboard table {
+  width: 100%;
+}
+#dashboard table .table-header {
+  border: 1px solid #000000;
+}
+#dashboard table tr:nth-child(even) {
+  background-color: rgba(36, 49, 82, 0.07);
+}
+#dashboard table tr.clickable:hover {
+  cursor: pointer;
+}
+#dashboard table th, #dashboard table td {
+  padding: 10px;
+  text-align: left;
+}
+
+#loadButtons {
+  margin-top: 45vh;
+  margin-left: 50vw;
+}
+
+#exit {
+  margin-left: 75vw;
+  position: fixed;
+}
+
+#timer {
+  margin-top: 65px;
+  margin-left: 75vw;
+  position: fixed;
+  font-family: Montserrat, Arial;
+  font-weight: 600;
+  font-size: 24px;
+  color: #000000;
+}
+
+#title {
+  margin-top: 70px;
+  margin-left: 100px;
+  font-family: Montserrat, Arial;
+  font-weight: 600;
+  font-size: 24px;
+  color: #000000;
+}
+
+#quiz {
+  margin-top: 40px;
+  margin-left: 100px;
+  width: 60vw;
 }
 
 #shortAnswersQuiz {
@@ -173,15 +243,33 @@ button:focus {
   margin: 15px 0px 30px 25px;
 }
 
+#bottom-btns {
+  margin-left: 100px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+#previous {
+  margin-right: 10px;
+}
+
 #submit {
-  margin-bottom: 20px;
-  margin-left: 50px;
+  margin-left: 500px;
 }
 
 #results {
   margin-left: 50px;
   margin-bottom: 20px;
   font-family: Montserrat, Arial;
+}
+
+.btn:disabled:hover {
+  cursor: default;
+}
+
+#loadQuiz {
+  margin-top: 40vh;
+  margin-left: 50vw;
 }
 
 #admin-login-container {
@@ -341,5 +429,3 @@ button:focus {
   text-decoration: none;
   cursor: pointer;
 }
-
-/*# sourceMappingURL=styles.css.map */

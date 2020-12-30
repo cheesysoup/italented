@@ -1,6 +1,31 @@
+#exit {
+    margin-left: 75vw;
+    position: fixed;
+}
+
+#timer {
+    margin-top: 65px;
+    margin-left: 75vw;
+    position: fixed;
+    font-family: $font;
+    font-weight: 600;
+    font-size: 24px;
+    color: $black;
+}
+
+#title {
+    margin-top: 70px;
+    margin-left: 100px;
+    font-family: $font;
+    font-weight: 600;
+    font-size: 24px;
+    color: $black;
+}
+
 #quiz {
-    margin-top: 50px;
-    margin-left: 50px;
+    margin-top: 40px;
+    margin-left: 100px;
+    width: 60vw;
 }
 
 #shortAnswersQuiz {
@@ -16,13 +41,33 @@
     margin: 15px 0px 30px 25px;
 }
 
+#bottom-btns {
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+#previous {
+    margin-right: 10px;
+}
+
 #submit {
-    margin-bottom: 20px;
-    margin-left: 50px;
+    margin-left: 500px;
 }
 
 #results {
     margin-left: 50px;
     margin-bottom: 20px;
     font-family: $font;
+}
+
+.btn:disabled {
+    &:hover {
+        cursor:default;
+    }
+}
+
+#loadQuiz {
+    margin-top: 40vh;
+    margin-left: 50vw;
 }

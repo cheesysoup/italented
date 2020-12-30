@@ -12,21 +12,27 @@
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </head>
-
     <body>
-        <button class="btn" onclick="exit();">Exit</button>
+        <div id="quiz-container">
+            <button id="exit" class="btn" onclick="exit();">Exit</button>
+            <p id="timer"></p>
 
-        <p id="timer"></p>
+            <div id="title"></div>
+            <div id="quiz"></div>
+            <div id="shortAnswersQuiz"></div>
 
-        <div id="quiz"></div>
-        <div id="shortAnswersQuiz"></div>
-        <button id="submit" class="btn">Submit</button>
-        <button id="previous" class="btn">Previous Page</button>
-        <button id="next" class="btn">Next Page</button>
-        <div class="spinner-border" id="loadSubmission" role="status" style="display: none">
+            <div id="bottom-btns">
+                <button id="previous" class="btn">Previous</button>
+                <button id="next" class="btn">Next</button>
+                <button id="submit" class="btn">Submit</button>
+            </div>
+        </div>
+        
+        <div id="results"></div>
+
+        <div class="spinner-border" id="loadQuiz" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-        <div id="results"></div>
         
         <script src="../scripts/test.js"></script>
     </body>

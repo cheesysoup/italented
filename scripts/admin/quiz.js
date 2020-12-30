@@ -4,7 +4,7 @@ function quizDetails(quiz) {
         <span id="exit" onclick="exitQuizDetails();">&leftarrow;</span>
         <div class="header">${quiz}<button class="btn" onclick="addModal('assign-quiz', assignQuizOptions);">Assign To</button></div>
         <table>
-            <tr><th>Name</th><th>Score</th></tr>
+            <tr><th>Name</th><th>Score</th><th>Time Limit</th></tr>
     `;
     let data = {};
     data['quizDetails'] = quiz;
@@ -13,7 +13,7 @@ function quizDetails(quiz) {
     getQuizData(data, o => {
         if (o.correct) {
             for (const row of o.details.slice(1)) {
-                details += `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`;
+                details += `<tr><td>${row[0]}</td><td>${row[2]}</td><td>${row[1]}</td></tr>`;
             }
             details += `</table>`;
             $('#quiz-details').html(details);
@@ -72,6 +72,7 @@ function assignQuiz() {
         student['Name'] = c.value;
         data['students'].push(student);
     }
+    data['time'] = $('#time-limit').val();
     postQuizData(data, o => postUserData(data, o => $('#assign-quiz').hide()));
 }
 

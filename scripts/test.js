@@ -4,6 +4,9 @@ function exit() {
 }
 
 (function() {
+    $('#quiz-container').hide();
+    $('#loadQuiz').show();
+
     // checks that user has logged in
     if (!localStorage.getItem("username")) {
         localStorage.setItem("quiz", "");
@@ -16,13 +19,15 @@ function exit() {
     const wrongPoints = 0;
 
     //Time in seconds for countdown timer
-    var totalTime = 3600;
+    const totalTime = localStorage.getItem("time-limit") * 60;
 
     var time = totalTime;
     var finished = false;
-    
-    let quiz = localStorage.getItem("quiz");
 
+    $(window).bind('beforeunload', function() {
+        if (!finished) return 'Are you sure you want to leave?';
+    });
+    
     //Multiple choice questions per page
     let pageSize = 5;
 
@@ -31,23 +36,24 @@ function exit() {
     let totalQuestions = 0;
 
     // short answer questions array
-    const shortAnswerQuestions = [
-        {
-            question: "What is 1.25*2?",
-            correctAnswer: ["5/2","2.5"],
-            answer: ""
-        },
-        {
-            question: "How many degrees does a circle have?",
-            correctAnswer: ["360","360 degrees","360 degree"],
-            answer: ""
-        },
-        {
-            question: "What is 1+1?",
-            correctAnswer: ["2"],
-            answer: ""
-        }
-    ];
+    const shortAnswerQuestions = [];
+    // const shortAnswerQuestions = [
+    //     {
+    //         question: "What is 1.25*2?",
+    //         correctAnswer: ["5/2","2.5"],
+    //         answer: ""
+    //     },
+    //     {
+    //         question: "How many degrees does a circle have?",
+    //         correctAnswer: ["360","360 degrees","360 degree"],
+    //         answer: ""
+    //     },
+    //     {
+    //         question: "What is 1+1?",
+    //         correctAnswer: ["2"],
+    //         answer: ""
+    //     }
+    // ];
 
     function setup(questions) {
         function buildQuiz() {
@@ -59,16 +65,16 @@ function exit() {
                 if (time == 0) {
                     finished = true;
                     showResults();
-                    location.href = `dashboard.html`;
+                    // location.href = `dashboard.html`;
                     alert("Test Finished: Answers have been submitted");
                 } else {
                     time--;
                 }
-                document.getElementById("timer").innerHTML = "Time Left: " + new Date(time * 1000).toISOString().substr(11,8);
+                document.getElementById("timer").innerHTML = new Date(time * 1000).toISOString().substr(11,8);
             }, 1000)
 
             let quiz = ``;
-            let numOfMult = 0;
+            let numOfMult = questions.length;
 
             for (let i = 0; i < questions.length; i++) {
                 const question = questions[i];
@@ -89,12 +95,11 @@ function exit() {
                     </label>`;
                 quiz += `<div class="question" id="question${i+1}"> ${i + 1}. ${question.question} </div>`;
                 if (question.image) {
-                    quiz += `<div id="image${i+1}><img id="x" src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
+                    quiz += `<div id="image${i+1}"><img src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
                 }
                 quiz += `<div class="answers" id="answers${i+1}">${answers}</div>`;
-                numOfMult = i+1;
             }
-            console.log(quiz)
+            $('#title').html(localStorage.getItem("quiz"));
             $('#quiz').html(quiz);
             for (let q = pageSize+1; q <= questions.length; q++){
                 $(`#question${q}`).hide();
@@ -115,7 +120,7 @@ function exit() {
                 </label>`;
 
             shortAnswersQuiz += 
-                `<div class="shortAnswerQuestions name="answerBox${questionNumber}" id="question${questionNumber+numOfMult+1}"> ${questionNumber+numOfMult+1}. ${shortAnswerQuestions[questionNumber].question} </div>
+                `<div class="shortAnswerQuestions" name="answerBox${questionNumber}" id="question${questionNumber+numOfMult+1}"> ${questionNumber+numOfMult+1}. ${shortAnswerQuestions[questionNumber].question} </div>
                 <div class="shortAnswersInput" id="answers${questionNumber+numOfMult+1}"> ${shortAnswersInput} </div>`
 
             return shortAnswersQuiz;
@@ -126,12 +131,11 @@ function exit() {
             let allShortAnswers = '';
             for (let i=0; i < shortAnswerQuestions.length; i++) {
                 allShortAnswers += buildShortAnswersOneByOne(i,numOfMult);
-
             }
             $('#shortAnswersQuiz').html(allShortAnswers);
             
             totalQuestions = numOfMult + shortAnswerQuestions.length;
-            totalPages = Math.trunc(totalQuestions/5);
+            totalPages = Math.ceil(totalQuestions/5);
             for (let q = pageSize+1; q <= numOfMult + shortAnswerQuestions.length; q++){
                 $(`#question${q}`).hide();
                 $(`#image${q}`).hide();
@@ -222,7 +226,7 @@ function exit() {
             let score = numCorrect * correctPoints + numBlank * blankPoints + numWrong * wrongPoints;
             $('#results').html(`${numCorrect} correct, ${numBlank} blank, and ${numWrong} wrong<br>Your final score is ${score} out of ${totalPoints} possible points`);
             
-            $("#loadSubmission").show();
+            $("#loadQuiz").show();
             data['Score'] = score;
             data['user'] = localStorage.getItem("username");
             data['pswrd'] = localStorage.getItem("password");
@@ -235,7 +239,7 @@ function exit() {
                         url: 'https://script.google.com/macros/s/AKfycbwqvNVeFbXM7mRUniqGfoO-KDfCNn0dpWZH1COiiLh5SPvs9Ig/exec',
                         method: "POST", dataType: "json", data: data,
                         success: function(o) {
-                            $("#loadSubmission").hide();
+                            $("#loadQuiz").hide();
                         }
                     })
                 }
@@ -245,12 +249,26 @@ function exit() {
         // populate components
         buildQuiz();
         $('#submit').click(showResults);
-        MathJax.typeset()
+        MathJax.typeset();
         $('#next').click(nextPage);
         $('#previous').click(previousPage);
+
+        if (currentPage == 0) {
+            $('#previous').prop('disabled', true);
+        } else {
+            $('#previous').prop('disabled', false);
+        }
+        if (currentPage == totalPages-1) {
+            $('#next').prop('disabled', true);
+        } else {
+            $('#next').prop('disabled', false);
+        }
+
+        $('#loadQuiz').hide();
+        $('#quiz-container').show();
     }
     function nextPage(){
-        if (currentPage < totalPages){
+        if (currentPage < totalPages-1){
             for (let q = 1; q < pageSize+1; q++){
                 $(`#question${currentPage*5+q}`).hide();
                 $(`#image${currentPage*5+q}`).hide();
@@ -261,6 +279,10 @@ function exit() {
                 $(`#question${currentPage*5+q}`).show();
                 $(`#image${currentPage*5+q}`).show();
                 $(`#answers${currentPage*5+q}`).show();
+            }
+            $('#previous').prop('disabled', false);
+            if (currentPage == totalPages-1) {
+                $('#next').prop('disabled', true);
             }
         }
     }
@@ -276,6 +298,10 @@ function exit() {
                 $(`#question${currentPage*5+q}`).show();
                 $(`#image${currentPage*5+q}`).show();
                 $(`#answers${currentPage*5+q}`).show();
+            }
+            $('#next').prop('disabled', false);
+            if (currentPage == 0) {
+                $('#previous').prop('disabled', true);
             }
         }
     }

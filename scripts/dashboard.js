@@ -4,8 +4,9 @@ function logout() {
     location.href = `../index.html`;
 }
 
-function loadQuiz(q) {
+function loadQuiz(q, t) {
     localStorage.setItem("quiz", q);
+    localStorage.setItem("time-limit", t);
     location.href = `test.html`;
 }
 
@@ -28,19 +29,64 @@ function loadQuiz(q) {
         data: data,
         success: function (o) {
             let details = o.details;
-            let dashboard = '';
+            let dashboard = `
+                <div class="container">
+                    <div id="header" class="row">
+                        <div class="col-10">
+                            <div id="welcome">Welcome, ${o.student.split(" ")[0]}!</div>
+                        </div>
+                        <div class="col-2">
+                            <button id="logout" class="btn" onclick="logout();">Logout</button>
+                        </div>
+                    </div>
+                    <div class="table-title row"><div class="col">To-Do</div></div>
+                    <div class="row"><div class="col">
+                        <table>
+                            <tr class="table-header">
+                                <th>NAME</th>
+                                <th>TIME</th>
+                                <th>DUE DATE</th>
+                            </tr>`;
             for (let i = 1; i < details.length; i++) {
                 if (details[i] != '') {
-                    if (details[i][1] !== "") {
-                        dashboard += `<button id="quiz${i}" class="btn" onclick="loadQuiz('${details[i][0]}');" disabled>${details[i][0]}</button>`;
-                    } else {
-                        dashboard += `<button id="quiz${i}" class="btn" onclick="loadQuiz('${details[i][0]}');">${details[i][0]}</button>`;
+                    if (details[i][2] === "") {
+                        dashboard += `<tr class="clickable" onclick="loadQuiz('${details[i][0]}', ${details[i][1]});">
+                            <td id="quiz${i}">${details[i][0]}</td>
+                            <td>${details[i][1]}</td>
+                            <td></td>
+                        </tr>`;
                     }
                 }
             }
-            $('#quizButtons').html(dashboard);
+            dashboard += `
+                        </table>
+                    </div></div>
+                    <div class="table-title row"><div class="col">Submitted</div></div>
+                    <div class="row"><div class="col">
+                        <table>
+                            <tr class="table-header">
+                                <th>NAME</th>
+                                <th>STATUS</th>
+                                <th>SCORE</th>
+                            </tr>`;
+            for (let i = 1; i < details.length; i++) {
+                if (details[i] != '') {
+                    if (details[i][2] !== "") {
+                        dashboard += `<tr>
+                            <td id="quiz${i}">${details[i][0]}</td>
+                            <td>Graded</td>
+                            <td>${details[i][2]}</td>
+                        </tr>`;
+                    }
+                }
+            }
+            dashboard += `
+                        </table>
+                    </div></div>
+                </div>`;
+            $('#dashboard').html(dashboard);
             $("#loadButtons").hide();
-            localStorage.setItem('name', o.student)
+            localStorage.setItem('name', o.student);
         }
     });
 })();

@@ -100,7 +100,6 @@ function addStudent() {
     data['Last Name'] = last;
     data['newStudent'] = true;
     postUserData(data, o => {
-        console.log(o);
         postQuizData(data, o => $('#new-student').hide())
     });
 }

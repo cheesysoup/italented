@@ -4,7 +4,7 @@ function studentDetails(student) {
         <span id="exit" onclick="exitStudentDetails();">&leftarrow;</span>
         <div class="header">${student}</div>
         <table>
-            <tr><th>Quiz</th><th>Score</th></tr>
+            <tr><th>Quiz</th><th>Score</th><th>Time Limit</th></tr>
     `;
     let data = {};
     data['studentDetails'] = student;
@@ -13,7 +13,7 @@ function studentDetails(student) {
     getUserData(data, o => {
         if (o.correct) {
             for (const row of o.details.slice(1)) {
-                details += `<tr onclick="studentQuizDetails('${student}', '${row}');"><td>${row[0]}</td><td>${row[1]}</td></tr>`;
+                details += `<tr onclick="studentQuizDetails('${student}', '${row}');"><td>${row[0]}</td><td>${row[2]}</td><td>${row[1]}</td></tr>`;
             }
             details += `</table>`;
             $('#student-details').html(details);
@@ -76,7 +76,7 @@ function studentQuizDetails(student, quiz) {
             }
             results += `<div class="question" id="question${i+1}"> ${i + 1}. ${question.question} </div>`;
             if (question.image) {
-                answers += `<div id="image${i+1}><img id="x" src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
+                results += `<div id="image${i+1}"><img src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
             }
             results += `<div class="answers" id="answers${i+1}">${answers}</div>`;
         }
