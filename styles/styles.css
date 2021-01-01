@@ -111,7 +111,7 @@ button:focus {
   box-sizing: border-box;
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
-.mc-container:hover input ~ .mc {
+.mc-container:hover input ~ .mc.open {
   background: #C4C4C4;
 }
 .mc-container input:checked ~ .mc {
@@ -261,6 +261,161 @@ button:focus {
   margin-left: 50px;
   margin-bottom: 20px;
   font-family: Montserrat, Arial;
+}
+
+#viewQuizResults {
+  margin-left: 500px;
+}
+
+#bgBox {
+  font-family: Montserrat, Arial;
+}
+
+#quizNamePopup {
+  font-size: 35px;
+  margin-top: 26px;
+  margin-left: 25px;
+  color: #6A6A6A;
+  font-weight: bold;
+  display: inline-block;
+}
+
+#quizScoreText {
+  font-size: 35px;
+  margin-top: 25px;
+  margin-left: 10px;
+  color: #999999;
+  font-weight: 100;
+  display: inline-block;
+}
+
+#yourScoreText {
+  font-size: 36px;
+  color: #777777;
+  font-weight: 100;
+  margin-left: 550px;
+  margin-top: 30px;
+}
+
+#scoreBreakdown {
+  position: relative;
+  color: #777777;
+  font-size: 25px;
+  font-weight: 200;
+  z-index: 999;
+}
+
+#fractionScore {
+  position: relative;
+  color: #5e5e5e;
+  font-size: 40px;
+  font-weight: 700;
+  z-index: 999;
+}
+
+#bigScore {
+  color: #5e5e5e;
+  font-size: 100px;
+  font-weight: 900;
+  margin-left: 550px;
+  margin-top: -330px;
+}
+
+#congratsP {
+  color: #777777;
+  font-size: 20px;
+  font-weight: 100;
+  margin-left: 550px;
+  margin-top: -20px;
+  margin-right: 20px;
+}
+
+#reviewQuiz {
+  position: relative;
+  color: #868686;
+  top: 490px;
+  right: 175px;
+  font-size: 24px;
+  padding: 8px 32px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  border: 3px solid #BCBCBC;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+  z-index: 600;
+}
+#reviewQuiz:hover {
+  color: #ffffff;
+  background-color: #868686;
+  cursor: pointer;
+}
+
+#popupX {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: #F5F5F5;
+  border: none;
+  left: 830px;
+  bottom: 450px;
+}
+#popupX:hover #xRect1 {
+  background-color: #a0a0a0;
+  cursor: pointer;
+}
+#popupX:hover #xRect2 {
+  background-color: #a0a0a0;
+  cursor: pointer;
+}
+
+#xRect1, #xRect2 {
+  height: 40px;
+  width: 7px;
+  background-color: #cacaca;
+}
+
+#xRect1 {
+  transform: rotate(45deg);
+}
+
+#xRect2 {
+  transform: rotate(90deg);
+}
+
+#popupBox {
+  background-color: #F5F5F5;
+  width: 900px;
+  height: 600px;
+  z-index: 199;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  border: solid 3px #BCBCBC;
+}
+
+#scoreBox {
+  background-color: #DEDEDE;
+  width: 900px;
+  height: 400px;
+  z-index: 199;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 3px #BCBCBC;
+}
+
+#bgBox {
+  z-index: 500;
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
 }
 
 .btn:disabled:hover {
