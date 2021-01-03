@@ -49,7 +49,7 @@ function loadQuiz(q, t) {
                             </tr>`;
             for (let i = 1; i < details.length; i++) {
                 if (details[i] != '') {
-                    if (details[i][2] === "") {
+                    if (details[i][3] === "") {
                         dashboard += `<tr class="clickable" onclick="loadQuiz('${details[i][0]}', ${details[i][1]});">
                             <td id="quiz${i}">${details[i][0]}</td>
                             <td>${details[i][1]}</td>
@@ -71,11 +71,11 @@ function loadQuiz(q, t) {
                             </tr>`;
             for (let i = 1; i < details.length; i++) {
                 if (details[i] != '') {
-                    if (details[i][2] !== "") {
+                    if (details[i][3] !== "") {
                         dashboard += `<tr>
                             <td id="quiz${i}">${details[i][0]}</td>
                             <td>Graded</td>
-                            <td>${details[i][2]}</td>
+                            <td>${details[i][3]}</td>
                         </tr>`;
                     }
                 }

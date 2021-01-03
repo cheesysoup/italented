@@ -13,7 +13,7 @@ function quizDetails(quiz) {
     getQuizData(data, o => {
         if (o.correct) {
             for (const row of o.details.slice(1)) {
-                details += `<tr><td>${row[0]}</td><td>${row[2]}</td><td>${row[1]}</td></tr>`;
+                details += `<tr><td>${row[0]}</td><td>${row[3]}</td><td>${row[1]}</td></tr>`;
             }
             details += `</table>`;
             $('#quiz-details').html(details);

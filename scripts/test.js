@@ -7,11 +7,9 @@ function exit() {
     $('#quiz-container').hide();
     $('#loadQuiz').show();
 
-    // checks that user has logged in
-    if (!localStorage.getItem("username")) {
-        localStorage.setItem("quiz", "");
-        location.href = `../index.html`;
-    }
+    const username = localStorage.getItem("username");
+    const password = localStorage.getItem("password");
+    const quiz = localStorage.getItem("quiz");
 
     // set score factors
     const correctPoints = 6;
@@ -23,10 +21,6 @@ function exit() {
 
     var time = totalTime;
     var finished = false;
-
-    $(window).bind('beforeunload', function() {
-        if (!finished) return 'Are you sure you want to leave?';
-    });
     
     //Multiple choice questions per page
     let pageSize = 5;
@@ -57,23 +51,7 @@ function exit() {
 
     function setup(questions) {
         function buildQuiz() {
-            //Building timer/counter
-            var count = setInterval(function(){
-                if (finished) {
-                    clearInterval(count);
-                }
-                if (time == 0) {
-                    finished = true;
-                    showResults();
-                    // location.href = `dashboard.html`;
-                    alert("Test Finished: Answers have been submitted");
-                } else {
-                    time--;
-                }
-                document.getElementById("timer").innerHTML = new Date(time * 1000).toISOString().substr(11,8);
-            }, 1000)
-
-            let quiz = ``;
+            let quizHtml = ``;
             let numOfMult = questions.length;
 
             for (let i = 0; i < questions.length; i++) {
@@ -95,19 +73,69 @@ function exit() {
                         <span class="mc open"></span>
                         Leave blank
                     </label>`;
-                quiz += `<div class="question" id="question${i+1}"> ${i + 1}. ${question.question} </div>`;
+                    quizHtml += `<div class="question" id="question${i+1}"> ${i + 1}. ${question.question} </div>`;
                 if (question.image) {
-                    quiz += `<div id="image${i+1}"><img src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
+                    quizHtml += `<div id="image${i+1}"><img src="https://drive.google.com/uc?export=view&id=${question.image}"></div>`;
                 }
-                quiz += `<div class="answers" id="answers${i+1}">${answers}</div>`;
+                quizHtml += `<div class="answers" id="answers${i+1}">${answers}</div>`;
             }
             $('#title').html(localStorage.getItem("quiz"));
-            $('#quiz').html(quiz);
+            $('#quiz').html(quizHtml);
             for (let q = pageSize+1; q <= questions.length; q++){
                 $(`#question${q}`).hide();
                 $(`#image${q}`).hide();
                 $(`#answers${q}`).hide();
             }
+
+            // building timer/counter
+            let data = {};
+            data['user'] = username;
+            data['pswrd'] = password;
+            $.ajax({
+                url: 'https://script.google.com/macros/s/AKfycbwqvNVeFbXM7mRUniqGfoO-KDfCNn0dpWZH1COiiLh5SPvs9Ig/exec',
+                method: "GET", dataType: "json", data: data,
+                success: function (o) {
+                    o.details.forEach((item, i) => {
+                        if (i > 0 && item[0] === quiz) {
+                            if (item[2]) {
+                                time = totalTime - (Date.now() - item[2]) / 1000;
+                            } else {
+                                // api call to store start time
+                                let startTime = Date.now();
+                                console.log(startTime)
+                                data['quiz'] = quiz;
+                                data['Start'] = startTime;
+                                $.ajax({
+                                    url: 'https://script.google.com/macros/s/AKfycbz7cE2k_h8VMNbfXTiREI5mc-P9xz6hKo59WVHYfk5y7df4GTP8/exec',
+                                    method: "POST", dataType: "json", data: data,
+                                    success: function (o) {
+                                        $.ajax({
+                                            url: 'https://script.google.com/macros/s/AKfycbwqvNVeFbXM7mRUniqGfoO-KDfCNn0dpWZH1COiiLh5SPvs9Ig/exec',
+                                            method: "POST", dataType: "json", data: data,
+                                            success: o => {}
+                                        })
+                                    }
+                                });
+                            }
+                            var count = setInterval(function() {
+                                if (finished) {
+                                    clearInterval(count);
+                                }
+                                if (time == 0) {
+                                    finished = true;
+                                    showResults();
+                                    // location.href = `dashboard.html`;
+                                    // alert("Test Finished: Answers have been submitted");
+                                } else {
+                                    time--;
+                                }
+                                document.getElementById("timer").innerHTML = new Date(time * 1000).toISOString().substr(11,8);
+                            }, 1000);
+                        }
+                    })
+                }
+            });
+
             buildAllShortAnswers(numOfMult);
         }
 
@@ -278,9 +306,9 @@ function exit() {
 
             $("#loadQuiz").show();
             data['Score'] = score;
-            data['user'] = localStorage.getItem("username");
-            data['pswrd'] = localStorage.getItem("password");
-            data['quiz'] = localStorage.getItem("quiz");
+            data['user'] = username;
+            data['pswrd'] = password;
+            data['quiz'] = quiz;
 
             $("#loadQuiz").hide();
             $.ajax({
@@ -564,13 +592,49 @@ function exit() {
             url: 'https://script.google.com/macros/s/AKfycbwoTxPRGLrIFBhwZCHVl4sqE9mVwDdB6znxXbmDztzD6-bmU8Ct/exec',
             method: "GET",
             dataType: "json",
-            data: { "quiz": localStorage.getItem("quiz") }
+            data: { "quiz": quiz }
         })
         .done(function(data) {
             callback(data.questions);
         });
     }
-    
-    getQuestions(setup);
 
+    // checks that user has logged in
+    if (!username) {
+        localStorage.setItem("quiz", "");
+        location.href = `../index.html`;
+        return;
+    }
+    if (!quiz) {
+        location.href = `dashboard.html`;
+        return;
+    }
+
+    let data = {};
+    data['user'] = username;
+    data['pswrd'] = password;
+    $.ajax({
+        url: 'https://script.google.com/macros/s/AKfycbwqvNVeFbXM7mRUniqGfoO-KDfCNn0dpWZH1COiiLh5SPvs9Ig/exec',
+        method: "GET",
+        dataType: "json",
+        data: data,
+        success: function (o) {
+            let details = o.details;
+            for (let i = 1; i < details.length; i++) {
+                if (details[i] && details[i][0] === quiz) {
+                    if (details[i][3] !== "") {
+                        // quiz is already submitted
+                        exit();
+                    } else {
+                        $(window).bind('beforeunload', function() {
+                            if (!finished) return 'Are you sure you want to leave?';
+                        });
+
+                        getQuestions(setup);
+                    }
+                    break;
+                }
+            }
+        }
+    });
 })();
