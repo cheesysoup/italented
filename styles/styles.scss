@@ -23,8 +23,11 @@ $font: Montserrat, Arial;
 $white: #FFFFFF;
 $black: #000000;
 $gray: #C4C4C4;
+$light-blue: #88B8D6;
+$light-gray: #DDDDDD;
 
 @import "presets";
+@import "common";
 
 @import "home";
 
