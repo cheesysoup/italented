@@ -31,11 +31,11 @@ function react() {
             <div class="footer-section-pages side1" style="align-items: flex-end;">
                 <div style="max-width: 120px; padding-right: 40px;">
                     <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">Home</p>
-                    <p href="index.html" class="footer-page-link" onclick="location.href='about.html'">About</p>
+                    <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">About</p>
                     <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">Classes</p>
                 </div>
             </div>
-            <div class="footer-section-pages side2" style="align-items: flex-start;">
+            <div class="footer-section-pages side2">
                 <div style="padding-left: 40px;">
                     <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">Contact</p>
                     <p href="index.html" class="footer-page-link" onclick="location.href='index.html'">Login</p>

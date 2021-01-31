@@ -14,8 +14,8 @@ button:focus {
     font-weight: 500 !important;
     font-size: 18px !important;
     line-height: 22px !important;
-    color: $light-blue !important;
-    background-color: $white !important;
+    color: #88B8D6 !important;
+    background-color: #FFFFFF !important;
     position:relative;
     top:5px;
     float:right;
@@ -30,7 +30,7 @@ button:focus {
     width: $width;
     height: $height;
     padding: $vertical-pad 10px;
-    border: 1px solid $black;
+    border: 1px solid #000000;
     box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     font-family: $font;
